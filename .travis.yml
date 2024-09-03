@@ -1,0 +1,21 @@
+# Travis YML CI/CD config
+language: node_js
+node_js:
+  - 14.17.3
+dist: trusty
+services:
+  - postgresql
+  - rabbitmq
+  - redis-server
+addons:
+  postgresql: "9.5"
+before_install:
+  - psql -U postgres -f db_pg_schema.sql
+install:
+  - npm install
+  - npm run build
+before_script:
+  - node service_meta.js &
+  - node service_worker.js &
+script:
+  - npm run test

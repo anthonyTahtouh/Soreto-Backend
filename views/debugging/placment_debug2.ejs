@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <style>
+    html,body{ margin:0; padding:0; height:100%; width:100%; }
+
+  /*.border{
+      border-style: solid;
+      border-width: 1px;
+      margin: 10px;
+      margin-bottom: 20px;
+      padding: 5px 10px;
+      text-align: centre;
+      width: 75%;
+  }*/
+  
+  body{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/7a/Paraty_09_2007_59.JPG');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .logo {
+      display: block;
+      position: relative;
+      margin: auto;
+      height: 120px;
+      max-width: 120px;
+  }
+
+  </style>
+
+  <title>Sample page to load reverb js sdk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="offset-3 col-6">
+      <div class="card">
+
+        <div class="card-header">
+          <img class="logo" src="https://s3-eu-west-1.amazonaws.com/s3-reverb-hosting-prod/assets/logo.svg" alt="Reverb Logo">
+        </div>
+    
+        <div class="card-body">
+          <form action="" class="form">
+
+            <div class="row mt-2">
+
+              <div class="col-6">
+                <label class="form-label" for="name">Name</label>
+                <input id="name" type="text" class='name-input form-control' name="name" value="Debug User">
+              </div>
+
+              <div class="col-6">
+                <label class="form-label" for="email">Email</label>
+                <input id="email" type="text" class='email-input form-control' name="email" value='debug@soreto.com'>
+              </div>
+              
+            </div>
+            <div class="row mt-2">
+              
+                <label for="country" class="form-label">Country</label>
+
+                <div class="row">
+                  <div class="col-6">
+                    <select class="form-control" name="countrySel" id="countrySel">
+                      <option value="GB">GB</option>
+                      <option value="en_GB">en_GB</option>
+                      <option value="DE">DE</option>
+                      <option value="US">US</option>
+                    </select>
+                  </div>
+
+                  <div class="col-6">
+                    <input id="country" type="text" class='country-input form-control' name="country" value='GB'> 
+                  </div>
+                </div>                    
+              
+            </div>
+            <div class="row mt-2">
+              <label class="form-label">Soure Tag</label>
+              
+              <div class="row">
+                <div class="col-6">
+                  <select class="form-control" name="sourceTagSel" id="sourceTagSel">
+                    <option value=""></option>
+                    <option value="CONFIRMATION_PAGE">CONFIRMATION_PAGE</option>
+                    <option value="STATIC_PAGE_ON_SORETO">STATIC_PAGE_ON_SORETO</option>
+                    <option value="STATIC_PAGE_ON_CLIENT">STATIC_PAGE_ON_CLIENT</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <input id="sourceTag" type="text" class='source-tag-input form-control' name="sourceTag" value='CONFIRMATION_PAGE'><br/>
+                </div>
+              </div>             
+              
+            </div>
+            <div class="row mt-2">
+              <div class="col-3">
+                <div class="form-check">
+                  <input id="testMode" class='test-input form-check-input' type="checkbox" name="test-mode" value="test-mode" checked>
+                  <label class="form-check-label" for="testMode">TestMode</label>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-check">
+                  <input id="notShowLightbox" class='test-input form-check-input' type="checkbox" name="show-lighbox-input">
+                  <label class="form-check-label" for="notShowLightbox">Do not show Lightbox</label>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-check">
+                  <input id="showWidget" class='test-input form-check-input' type="checkbox" name="show-share-static-page-input">
+                  <label class="form-check-label" for="showWidget">Show Widget</label>
+                </div>
+              </div>
+              <div class="col-3">
+                <input id="widgetType" type="text" class='email-input form-control' placeholder="Widget type">
+              </div>
+            </div>
+            <div class="row mt-2">
+
+              <label class="form-label">Client Id</label>
+              <div class="col-6">
+
+                <select name="client ids" id="client-id-2" class="form-control">
+                  <option value="5d6d46be12fd1c31ce257e18">SAMSUNG UK</option>
+                  <option value="5dee829ce2b5bc4a8ae86087">COS</option>
+                  <option value="5cee4f92ee9c6f5a7e11b331">MONKI</option>
+                  <option value="5e4d460d91ffff241cc29eb1">H&M</option>
+                  <option value="5f33aa28d3771a2f0a18e29d">VetApprovedRx USA</option>
+                </select>
+                
+              </div>
+              <div class="col-6">
+                <input type="text" class="form-control" id='client-id' placeholder="client id" name="" required>
+              </div>
+            </div>
+            <div class="row mt-2" id="platform">
+              <div class="col-3">
+                <input type="radio" name="state" class="form-check-input" value="local" checked>
+                <label class="form-check-label">local</label>
+              </div>
+              <div class="col-3">
+                <input type="radio" name="state" class="form-check-input" value="staging">
+                <label class="form-check-label">staging</label>
+              </div>
+              <div class="col-3">
+                <input type="radio" name="state" class="form-check-input" value="sandbox">
+                <label class="form-check-label">sandbox</label>
+              </div>
+              <div class="col-3">
+                <input type="radio" name="state" class="form-check-input" value="live">
+                <label class="form-check-label">live</label>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-12">
+                <button class="btn btn-success w-100" onclick="launchSDK(getPlatform());" type="button">Load new client</button>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-12">
+                <button class="btn btn-success w-100" onclick="reverbSendOrderTest();" type="button">Fire prod track</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="offset-3 col-6">
+      <div style="width: 100%; height:500px;">
+        <div id="soretosharewidget">Share static page will be replaced here...</div>
+      </div>      
+    </div>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+  function getPlatform(){
+
+    try {
+      return document.querySelector('input[name=\"state\"]:checked').value;  
+    } catch (error) {
+      alert('Select the environment!');
+      throw error;
+    }
+    
+  }
+
+  function getName(){
+    return document.querySelector('input.name-input').value
+  }
+
+  function getEmail(){
+    return document.querySelector('input.email-input').value
+  }
+
+  function getClient(){
+
+    let clientId = document.getElementById('client-id').value;
+
+    if(!clientId){
+      document.getElementById('client-id').value = document.getElementById('client-id-2').value;
+    }else{
+      document.getElementById('client-id-2').value = clientId;
+    }
+
+    return document.getElementById('client-id').value;
+  }
+
+  function getCountry(){
+
+    let country = $('#country').val();
+
+    if(!country){
+      $('#country').val($('#countrySel').val());
+    }else{
+      $('#countrySel').val(country);
+    }
+
+    return $('#country').val();
+  }
+
+  function getSourceTag() {
+
+    let sourceTag = $('#sourceTag').val();
+
+    if(!sourceTag){
+      $('#sourceTag').val($('#sourceTagSel').val());
+    }else{
+      $('#sourceTagSel').val(sourceTag);
+    }
+
+    return $('#sourceTag').val();    
+  }
+
+  function getRan(){
+    return Math.floor(Math.random() * 89123) + 1 
+  }
+
+  function getTestMode(){
+    return document.querySelector('input.test-input').checked
+  }
+
+  function getShowLightboxSetting(){
+    return $('#notShowLightbox').prop('checked');
+  }
+
+  function getShowWidget(){
+    return $('#showWidget').prop('checked');
+  }
+  
+  function getWidgetType(){
+    return $('#widgetType').val();
+  }
+
+  $('#client-id-2').on('change', () => {
+    document.getElementById('client-id').value = document.getElementById('client-id-2').value;
+  });
+
+  $('#countrySel').on('change', () => {
+    $('#country').val($('#countrySel').val());
+  });
+
+  $('#sourceTagSel').on('change', () => {
+    $('#sourceTag').val($('#sourceTagSel').val());
+  });
+  
+  var SORETO = {};
+  SORETO.Client = {};
+  SORETO.User = {};
+  SORETO.Order = {};
+  SORETO.Order.Items = [];
+  SORETO.Lightbox = {};
+
+  /*** Set your transaction parameters ***/
+  SORETO.Client.id = '5c18c33d9d61ff1f667bd7cf';
+  SORETO.User.firstName = getName();
+  SORETO.User.email = getEmail();
+  SORETO.Lightbox.doNotShow = getShowLightboxSetting();
+  SORETO.Order.id = 'debugpage'+getRan();
+  SORETO.Order.total = '33';
+  SORETO.Order.currency = 'GBP'; //Optional, Pounds by default
+  SORETO.Order.voucherCode = 'ABCD'; // Optional
+  SORETO.Order.country = getCountry(); // Optional, Great Britain by default
+  SORETO.sourceTag = getSourceTag();
+
+  SORETO.Order.Items = [
+  //  {'Item 1''description','ASVDDS', 1, '10.10' },
+  //  {'Item 2','description','ASSFDSFAS',2,'15.10' },
+  //  {'Item 3','description','FDSAFDSA',3,'20.10'},
+  ];
+
+  /*** Test mode flag ***/
+  SORETO.testMode = getTestMode();
+
+  /*** Advanced Options ***/
+  SORETO.User.new = true; //Optional
+  SORETO.openLightbox = true; // Optional, true by default.
+
+
+
+
+
+  function getRandomArbitrary(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  function launchSDK(platform){
+    existingSdk = document.getElementById('soreto')
+
+
+    if (existingSdk){
+      existingSdk.remove();
+      if (document.getElementById('uglipop_overlay_wrapper')){
+        document.getElementById('uglipop_overlay_wrapper').remove()
+      }
+      if (document.getElementById('uglipop_content_fixed')){
+        document.getElementById('uglipop_content_fixed').remove()
+      }
+    }
+
+    SORETO.Client.id = getClient();
+    SORETO.User.firstName = getName();
+    SORETO.User.email = getEmail();
+    SORETO.Lightbox.doNotShow = getShowLightboxSetting();
+    SORETO.Order.country = getCountry();
+    SORETO.sourceTag = getSourceTag();
+
+    SORETO.Widget = {};
+    SORETO.Widget.showWidget = getShowWidget();
+    SORETO.Widget.widgetType = getWidgetType();
+
+    (function(d, s, id) {
+      var script, first_script = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      script = d.createElement(s);
+      script.id = id;
+      console.log('platform')
+      switch(platform) {
+          case 'live':
+              script.src = "https://api.soreto.com/scripts/" + id + ".min.js";
+              break;
+          case 'staging':
+              script.src = "https://staging-api.soreto.com/scripts/" + id + ".min.js";
+              break;
+          case 'sandbox':
+              script.src = "https://sandbox-api.soreto.com/scripts/" + id + ".min.js";
+              break;
+          default:   
+          script.src = "http://localhost:5000/scripts/" + id + ".min.js";
+      }
+
+      first_script.parentNode.insertBefore(script, first_script);
+    }(document, 'script', 'soreto'));
+
+  }
+</script>
+</body>
+</html>

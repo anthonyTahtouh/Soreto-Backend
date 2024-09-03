@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta property="og:title" content="<%= title %>" />
+    <meta property="og:description" content="Don't say I don't look after you... Ryman are offering an exclusive 10% discount across their site when you buy from their store using my personal referral link. Thank me later!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="<%= imageUrl %>" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Montserrat:100,300,500,600,700");
+
+      html, body{
+        height: 100%;
+        background-color: #c92b1f;
+        margin: 0;
+      }
+      body {
+        color: rgba(255,255,255,1.0);
+        text-align: center;
+        letter-spacing: .02px;
+        line-height: 29px;
+        font-weight: 300;
+        font-size: 10px;
+        font-family: Montserrat, arial;
+
+      }
+
+      #container-desktop {
+        display: flex;
+        height: 100%;
+        /* min-height:100%;
+        position:relative; */
+      }
+      #header {
+        background:#ff0;
+        padding:10px;
+      }
+      #body {
+        display: flex;
+        min-height: 100%;
+        padding-bottom:42px;   /* Height of the footer */
+      }
+      #footer {
+        position:fixed;
+        bottom:0;
+        margin: 0;
+        width:100%;
+        height: 42px;   /* Height of the footer */
+        background-color: rgba(240,239,238,1.0);
+        font-size: 1em;
+        font-weight: 300;
+        color: rgba(90,90,90,1.0);
+        letter-spacing: .02px;
+        line-height: 21.0px;
+      }
+
+      #footer ul {
+        float: left;
+        list-style-type: none;
+        margin-bottom: 5%;
+      }
+      #footer ul li {
+        display: inline-block;
+      }
+
+      #footer ul li:not(:first-child) {
+        margin-left: 10px;
+      }
+
+      #footer ul li a{
+        cursor: pointer;
+      }
+
+      #footer ul li a:link,
+      #footer ul li a:visited {
+        text-decoration: none;
+      }
+
+      #footer ul li a:hover {
+        font-weight: 700;
+      }
+
+      #footer ul li a:active {
+        color: inherit;
+      }
+
+      #footer p {
+        float: right;
+        margin-right: 32px;
+      }
+
+      #footer::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+
+      .flex-container {
+        height: 100%;
+        width: 100%;
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: center;
+        align-items: center;
+        padding-bottom:42px;   /* Height of the footer */
+      }
+
+      .flex-items-default {
+          width: 300px;
+          height: 250px;
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: 0;
+      }
+
+      .flex-item-1 {
+        width: 100%;
+        height: 100%;
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: 200px;
+        align-self: center;
+
+      }
+
+      .clip-image {
+        width: 80%;
+        height: 80%;
+        background-size: 90%;
+        background-image: url(https://s3-eu-west-1.amazonaws.com/dist.soreto.com/clientsrc/assets/ryman/clip.png);
+        background-position: center center;
+        background-repeat:  no-repeat;
+        float:right;
+        margin-top:8%;
+        -ms-transform: rotate(-14deg); /* IE 9 */
+        -webkit-transform: rotate(-14deg); /* Safari 3-8 */
+        transform: rotate(-14deg);
+        margin-right: -5%;
+      }
+
+      .flex-item-2 {
+          width: 100%;
+          height: 100%;
+          flex-grow: 1;
+          flex-shrink: 0;
+          flex-basis: 200px;
+          align-self: center;
+      }
+
+      .header-container {
+        height: 100%;
+        position:relative;
+        margin-top: 20%;
+        margin-left: 7%;
+        float: left;
+      }
+
+      .header {
+        line-height:1.4;
+        margin-bottom: 8%;
+        font-size: 2em;
+        letter-spacing: 0.05em;
+      }
+
+      .header-logo {
+        margin-bottom: 10%;
+        width: 400px;
+      }
+
+      .main-header {
+        height: auto;
+        width: auto;
+        position: relative;
+        line-height:1.4;
+        margin-bottom: 16%;
+        font-size: 2em;
+      }
+
+      .main-header-discount {
+        font-size: 1.7em;
+        letter-spacing: -.06px;
+        line-height: 39.0px;
+        font-weight: 600;
+        line-height:1.2;
+      }
+
+      .btn {
+        background: url(https://s3-eu-west-1.amazonaws.com/dist.soreto.com/clientsrc/assets/ryman/button_get_code.svg);
+        height: 58px;
+        width: 275px;
+        position: relative;
+        top: 10%;
+        margin:auto;
+        margin-bottom: 50px;
+        border-radius: 7px;
+        color: rgba(255,255,255,1.0);
+        cursor: pointer;
+      }
+
+      .btn div {
+        padding: 4%;
+        font-size: 1.4em;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+      }
+
+      .btn:hover {
+        animation: btnAnimation 3s ease-in-out;
+      }
+
+      @keyframes btnAnimation {
+        0% {
+          transform: skewX(-5deg);
+        }
+
+        80% {
+          transform: skewX(-10deg);
+        }
+
+        100% {
+          transform: skewX(-15deg);
+        }
+      }
+
+      .campaignOptions {
+        height: 60px;
+        margin-left:30%;
+        margin-right:30%;
+        top: 90px;
+        position: relative;
+      }
+
+      .campaignOptions-icon {
+        float: left;
+      }
+      .clock-icon, .star-icon {
+        height: 12px;
+        width: 10px;
+        opacity: .3;
+        position: relative;
+        top: 2.2px;
+      }
+
+      .campaignOptions p {
+        color: rgba(255,255,255,1.0);
+        opacity: 1;
+        font-size: 1em;
+        font-weight: 500;
+        text-align: left;
+        display: inline;
+        text-align: left;
+        letter-spacing: .02px;
+        line-height: 21px;
+      }
+
+      .campaignOptions-terms {
+        float: right;
+      }
+
+      .modal {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(1.1);
+        transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+      }
+      .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 1rem 1.5rem;
+        height: 250px;
+        width: 600px;
+      }
+      .close-button {
+        float: right;
+        width: 1.2rem;
+        line-height: 1.2rem;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 0.25rem;
+        background-color: lightgray;
+      }
+      .close-button:hover {
+        background-color: darkgray;
+      }
+      .show-modal {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1.0);
+        transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+      }
+
+      .modal-container-img {
+        width: 30%; float:left;
+      }
+      .modal-container-logo {
+        position: relative;
+        top: 30px;
+        background-color: rgba(255,255,255,1.0);
+        float: left;
+        max-height: 120%;
+        max-width: 120%;
+      }
+      .modal-container-details {
+        color: #686966;
+        float: right;
+        width: 70%;
+      }
+      .modal-container-discount {
+        position: relative;
+        margin-bottom: 3%;
+        margin-top:5%;
+        font-size: 1.4em;
+        font-weight: 300;
+      }
+      .modal-container-codigo {
+        border-radius: 10px;
+        height: 50px;
+        width: 300px;
+        background-color: #fff6e7;
+        border: 1px solid #ffc178;
+        font-size: 1.6em;
+        font-weight: 700;
+        color: #040303;
+        line-height: 50px;
+        margin:auto;
+      }
+      .modal-container-customer {
+        position: relative;
+        margin-bottom: 0;
+        margin-top:8%;
+        color: #50cf98;
+        font-size: 1.5em;
+        font-weight: 500;
+      }
+      .modal-container-footer {
+        position: relative;
+        bottom:0;
+        width:106%;
+        height:30px;
+        margin-bottom: 0;
+        margin-top:236px;
+        margin-left:-24px;
+        padding-right: 10px;
+        text-align:right;
+        background-color: rgba(240,239,238,1.0);
+        font-size: 1em;
+        font-weight: 300;
+        color: rgba(90,90,90,1.0);
+      }
+
+      .container-mobile {
+        display: none;
+      }
+
+      @media only screen and (max-width: 1200px) {
+        .clip-image {
+          width: 100%;
+          height: 84%;
+          /* margin-top:0%; */
+          /* background-size: 100%; */
+        }
+
+        .header-logo {
+          margin-bottom: 5%;
+          width: 350px;
+        }
+
+        .header-container {
+          margin-top: 20%;
+        }
+
+        .main-header {
+          margin-bottom: 10%;
+        }
+      }
+
+
+      @media only screen and (max-width: 1025px) {
+
+        #container-desktop {
+          display: none;
+        }
+
+        .container-mobile {
+          display: block;
+        }
+
+        .header-container {
+          margin-top: 14%;
+          margin-left:0%;
+        }
+
+        .header {
+          font-size: 1.2em;
+          margin-bottom:16%;
+        }
+
+        .header-container {
+          width:100%;
+          font-size: 18px;
+          line-height: 25px;
+          letter-spacing: .5px;
+        }
+        .header-logo {
+          height: 80px;
+          margin-bottom: 8%;
+        }
+        .main-header {
+          margin-top: -30px;
+          font-size: 1.2em;
+        }
+        .main-header-discount {
+          font-size: 1.6em;
+        }
+
+        .btn {
+          height: 73px;
+          width: 345px;
+        }
+
+        .btn div {
+          padding: 6%;
+          font-size: 1em;
+        }
+
+        .campaignOptions {
+          width: 70%;
+          left: -40px;
+        }
+
+        #footer {
+          font-size: 1em;
+          height: 50px;
+        }
+
+        #footer ul li:not(:first-child) {
+          margin-top: 3px;
+          margin-left: 3px;
+        }
+
+        #footer ul {
+          float: none;
+          margin: 0;
+          padding:0;
+        }
+
+        #footer p {
+          float: none;
+          margin: 0px;
+        }
+
+        .modal-content {
+          width: 310px;
+          height: 330px;
+        }
+
+        .modal-container-img {
+          display: inline-block;
+          float: none;
+        }
+        .modal-container-logo {
+          float: none;
+        }
+        .modal-container-details {
+          margin-top: 2rem;
+          width: 100%;
+        }
+        .modal-container-discount {
+          text-align: center;
+        }
+        .modal-container-codigo {
+          width: 100%;
+        }
+        .modal-container-customer {
+          height: 100%;
+        }
+        .modal-container-footer {
+          position: fixed;
+          width: 97%;
+          text-align: center;
+          margin-top: 0;
+          /* display: none; */
+        }
+      }
+
+      @media only screen and (min-width: 550px) and (max-width: 1025px) {
+
+        .header-container {
+          margin-top: 8%;
+        }
+
+        .header {
+          margin-bottom:8%;
+        }
+
+        .header-logo {
+          margin-bottom: 4%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="container-desktop">
+      <div class="flex-container">
+        <div class="flex-item-1">
+          <div class="clip-image"></div>
+        </div>
+
+        <div class="flex-item-2">
+            <div class="header-container" align="center">
+                <div align="center">
+                    <img class="header-logo"
+                      src="https://s3.eu-west-2.amazonaws.com/sandbox-dist.soreto.com/clientsrc/assets/ryman/logo.svg"
+                      alt="header-logo"/>
+                  </div>
+              <div class="header">
+                Success! <br> You’ve shopped using <%= firstName %><br> exclusive referral link
+              </div>
+
+              <div class="main-header">
+                Click below to get an <br> <span class="main-header-discount">EXCLUSIVE 10% OFF</span> <br> site wide at Ryman.
+              </div>
+
+              <a>
+                <div class="btn" align="center"><div>GET CODE</div></div>
+              </a>
+            </div>
+        </div>
+
+      </div>
+
+      <div id="footer">
+        <ul>
+          <li><a href="https://soreto.com/terms-and-conditions/" target="_blank">Terms & Conditions</a></li>
+          <li>|</li>
+          <li><a href="https://soreto.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+        </ul>
+        <p>Ryman’s official referral program powered by Soreto</p>
+      </div>
+
+    </div>
+
+    <div class="container-mobile">
+      <div id="body">
+        <div class="header-container" align="center">
+          <div align="center">
+            <img class="header-logo"
+              src="https://s3.eu-west-2.amazonaws.com/sandbox-dist.soreto.com/clientsrc/assets/ryman/logo.svg"
+              alt="header-logo"/>
+          </div>
+
+          <div class="header">
+            Success! <br> You’ve shopped using <%= firstName %> <br> exclusive referral link
+          </div>
+
+          <div class="main-header">
+            Click below to get an <br> <span class="main-header-discount">EXCLUSIVE 10% OFF</span> <br> site wide at Ryman.
+          </div>
+
+          <a>
+            <div class="btn" align="center"><div>GET CODE</div></div>
+          </a>
+
+
+
+        </div>
+      </div>
+
+      <div id="footer" align="center">
+        <ul>
+          <li><a href="https://soreto.com/terms-and-conditions/" target="_blank">Terms & Conditions</a></li>
+          <li>|</li>
+          <li><a href="https://soreto.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+        </ul>
+        <p>Ryman’s official referral program powered by Soreto</p>
+      </div>
+
+    </div>
+
+    <div class="modal">
+      <div class="modal-content">
+          <span class="close-button">&times;</span>
+          <div class="modal-container">
+
+            <div class="modal-container-img" align="center">
+              <img class="modal-container-logo" src="	https://s3-eu-west-1.amazonaws.com/dist.soreto.com/clientsrc/assets/ryman/logo-small.png" alt="logo-small"/>
+            </div>
+            <div class="modal-container-details">
+              <h5 class="modal-container-discount">Your EXCLUSIVE 10% off is below</h5>
+              <div class="modal-container-codigo"><%= discountCode %></div>
+              <h6 class="modal-container-customer">Continue in <a href="<%= productUrl %>" target="_blank">ryman.co.uk</a></h6>
+            </div>
+
+          </div>
+          <div class="modal-container-footer">Ryman’s official referral program powered by Soreto</div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        var modal = document.querySelector('.modal');
+        var queries = {};
+
+        $.each(document.location.search.substr(1).split('&'),function(c,q){
+          if (q !== '' && q !== undefined) {
+            var i = q.split('=');
+            queries[i[0].toString()] = i[1].toString();
+          }
+        });
+
+        $('.btn').on('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var self = this;
+          var redirect = function(){
+            window.open('?showcode=true', '_blank');
+            window.open('<%= productUrl %>', '_self');
+          }
+          sendTracking('interstitial-cta','true',redirect())
+        });
+
+        $('.close-button').on('click', function(e) {
+          toggleModal();
+        });
+
+        if(queries && queries['showcode']){
+          toggleModal();
+        }
+        else {
+          onLoad();
+        }
+
+        function toggleModal() {
+          modal.classList.toggle('show-modal');
+        }
+
+      });
+
+      function onLoad(){
+        sendTracking('interstitial-loaded','true')
+      }
+
+      function sendTracking(trackingString,value,cb){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "<%= apiBaseUrl %>/api/v1/tracking", true);
+        xhttp.withCredentials = true;
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(JSON.stringify({clientId:"<%= clientId %>",type: trackingString ,value: value, sharedUrlId: "<%= sharedUrlId %>" }));
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState === 4) {
+            if(cb){
+            cb();
+            }
+            return;
+          }
+        }
+      }
+    </script>
+
+  </body>
+</html>

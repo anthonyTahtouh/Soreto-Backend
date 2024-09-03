@@ -1,0 +1,15 @@
+BACK_URL=http://localhost:5000
+PORT=5000
+COOKIE_DOMAIN=localhost
+COOKIE_SECRET=c00ki3s3cr3t
+FRONT_URL=http://localhost:4000
+NODE_ENV=dev
+SERVER_HOSTNAME=localhost
+SESSION_SECRET=s3ssi0ns3cr3t
+TOKEN_SECRET=t0k3ns3cr3t
+MAIL_TEMPLATES_SHARING_URL=12
+MARKETPLACE_ALLOWED_URLS=http://localhost:5000/,http://localhost:4000/
+DATABASE_URL=postgres://postgres:1234@localhost:5432/reverb
+DATABASE_URL_TEST=postgres://postgres:1234@localhost:5432/reverb_test
+POSTGRES_DOCKER_CONTAINER=postgres-local
+SHOPIFY_APP_CLIENT_SECRET=XDFGHTRE

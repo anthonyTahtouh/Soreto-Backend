@@ -1,0 +1,73 @@
+@mixin flexCenter() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin bgImage($url, $size: cover, $repeat: no-repeat, $position: center) {
+  background-image: url($url);
+  background-size: $size;
+  background-repeat: $repeat;
+  background-position: $position;
+}
+
+// https://angel-rs.github.io/css-color-filter-generator/
+$colors-to-filter: (
+    #32d851: brightness(0) saturate(100%) invert(90%) sepia(34%) saturate(4563%) hue-rotate(62deg) brightness(90%) contrast(87%),
+    #005efd: brightness(0) saturate(100%) invert(23%) sepia(84%) saturate(4873%) hue-rotate(215deg) brightness(102%) contrast(104%),
+    #000000: brightness(0) saturate(100%) invert(0%) sepia(90%) saturate(7440%) hue-rotate(112deg) brightness(114%) contrast(97%),
+    #cf2972: brightness(0) saturate(100%) invert(25%) sepia(41%) saturate(3872%) hue-rotate(311deg) brightness(93%) contrast(94%),
+    #007cf7: brightness(0) saturate(100%) invert(41%) sepia(99%) saturate(4223%) hue-rotate(195deg) brightness(99%) contrast(104%),
+    #df0022: brightness(0) saturate(100%) invert(14%) sepia(69%) saturate(4258%) hue-rotate(339deg) brightness(106%) contrast(120%),
+    #4c4c52: brightness(0) saturate(100%) invert(29%) sepia(7%) saturate(449%) hue-rotate(201deg) brightness(92%) contrast(87%),
+    #28a8e9: brightness(0) saturate(100%) invert(43%) sepia(95%) saturate(408%) hue-rotate(156deg) brightness(111%) contrast(93%),
+    #9c9c00: brightness(0) saturate(100%) invert(63%) sepia(21%) saturate(5315%) hue-rotate(27deg) brightness(89%) contrast(101%),
+    #FFFFFF: brightness(0) saturate(100%) invert(100%) sepia(94%) saturate(0%) hue-rotate(25deg) brightness(103%) contrast(101%),
+    #5f60de: brightness(0) saturate(100%) invert(33%) sepia(100%) saturate(925%) hue-rotate(217deg) brightness(93%) contrast(88%)  
+);
+
+@mixin recolor($color: #000, $opacity: 1) {
+    
+    // grayscale fallback if SVG from data url is not supported
+    $lightness: lightness($color);
+    filter: saturate(0%) brightness(0%) invert($lightness) opacity($opacity);
+
+    filter: map-get($colors-to-filter, $color) opacity($opacity);
+}
+
+.d-flex {
+  display: flex;
+
+  &.column {
+      flex-direction: column;
+  }
+
+  &.space-around {
+      justify-content: space-around;
+  }
+}
+
+@for $i from 1 through 20 {
+  &.f-#{$i} {
+      flex: $i;
+  }
+}
+
+.dnone {
+  display: none !important;
+  pointer-events: none;
+}
+
+.dnoneT {
+  opacity: 0;
+}
+
+.builderSpot {
+  &:hover {
+      box-shadow: 0 0 0 2px rgb(2, 241, 34);
+  }
+}
+
+.builderSpotSelected {
+  box-shadow: 0 0 0 3px rgb(2, 241, 34);
+}

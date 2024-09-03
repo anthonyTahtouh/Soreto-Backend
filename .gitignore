@@ -1,0 +1,20 @@
+.DS_Store
+node_modules
+bower_components
+reverb.iml
+.idea
+coverage
+reverb-backend.iml
+*.log
+uploads/file-*
+mochawesome-reports
+public/scripts/reverb-sdk.min.js
+public/scripts/reverb-sdk.min.js.map
+.env
+package-lock.json
+yarn.lock
+dist/*
+.nyc_output/*
+
+# extensão de local history
+.history

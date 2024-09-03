@@ -1,0 +1,355 @@
+<html>
+
+<head>
+    <style>
+        <%- css %>
+    </style>
+</head>
+
+<body>
+    <div sor-main-container>
+        <!-- MOBILE -->
+        <div sor-mobile-container>
+            <!-- TOGGLE BUTTON -->
+            <button sor-btn-toggle sor-toggle>
+                <% if(cpvGv.minimizationEnabled) { %>
+                    <img src="<%- data.style?.minimizeButtonIconUrl %>" alt="">
+                <% } else { %>
+                    <img src="<%- data.style?.closeButtonIconUrl %>" alt="">
+                <% } %>
+            </button>
+
+            <!-- CONTAINER MOBILE -->
+            <div sor-swipe-container-mobile>
+                <!-- COVER -->
+                <div sor-step-mobile="COVER" sor-cover-image-container-mobile>
+                    <div sor-cover-image-mobile class="f-1">
+                        <div sor-cover-image-over-info-title-container-mobile>
+                            <% if(data.content?.extraInfo?.info_2) { %>
+                            <div sor-cover-image-over-info-title-mobile schema-prop="data.content.extraInfo.info_2">
+                                <%- data.content?.extraInfo?.info_2 %>
+                            </div>
+                            <div sor-right-space-compensation></div>
+                            <% } %>
+                        </div>
+                        <div sor-cover-image-over-info-container-mobile>
+                            <div sor-cover-image-over-info-mobile class="primary-color">
+                                <span sor-cover-image-over-info-mobile-text schema-prop="data.content.mobile.heroImageOverInfo">
+                                    <%- data.content?.mobile?.heroImageOverInfo %>
+                                </span>
+                                <div sor-cover-image-over-info-btn-mobile schema-prop="data.content.mobile.swipeInstruction">
+                                    <%- data.content?.mobile?.swipeInstruction %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- USER_INFO_CAPTURE -->
+                <div sor-step-mobile="USER_INFO_CAPTURE" class="<%= showMobileStepOnLoad('USER_INFO_CAPTURE')%>">
+                    <div sor-user-info-capture-hero-image class="f-1"></div>
+                    <div sor-user-info-capture-description-container-mobile class="f-3 d-flex column">
+                        <div class="primary-color">
+                            <h1 sor-user-info-capture-title-mobile schema-prop="data.content.mobile.userInfoCaptureStep.title">
+                                <%- data.content?.mobile?.userInfoCaptureStep?.title %>
+                            </h1>
+                        </div>
+                        <% if(data.content?.mobile?.userInfoCaptureStep?.subtitle) { %>
+                        <div class="primary-color">
+                            <h2 sor-user-info-capture-subtitle-mobile schema-prop="data.content.mobile.userInfoCaptureStep.subtitle">
+                                <%- data.content?.mobile?.userInfoCaptureStep?.subtitle %>
+                            </h2>
+                        </div>
+                        <% } %>
+
+                        <% if(data.content?.mobile?.userInfoCaptureStep?.extraParagraphs && data.content?.mobile?.userInfoCaptureStep?.extraParagraphs?.length > 0) { %>
+                        <div sor-user-info-capture-extra-paragraph-container-mobile class="primary-color">
+                            <% data.content?.mobile?.userInfoCaptureStep?.extraParagraphs.forEach(function(paragraph){ %> 
+                                <p sor-user-info-capture-extra-paragraph-mobile><%-paragraph %></p>                                    
+                            <% }); %>
+                        </div>
+                        <%}%>
+                        <div sor-user-info-capture-form-container-mobile>
+                            <!-- CAPTURE USER INFO FORM -->
+                            <form action="" sor-user-info-form>
+                                <input type="text" required
+                                    placeholder="<%- data.content.userInfoFirstNameInputPlaceholder %>"
+                                    sor-user-info-input-first-name-form />
+                                <input type="email" required
+                                    placeholder="<%- data.content.userInfoEmailInputPlaceholder %>"
+                                    sor-user-info-input-email-form />
+                                <button type="submit" sor-submit-user-info-btn>
+                                    <%- data.content.userInfoSubmitButtonText %>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="d-flex" sor-footer>
+                            <% data.content.footer.paragraphs.forEach(function(paragraph){ %>
+                                <p><%- paragraph %></p>
+                                <% }); %>
+                        </div>
+                    </div>
+                </div>
+                <!-- SHARE -->
+                <div sor-step-mobile="SHARE" class="<%= showMobileStepOnLoad('SHARE')%>">
+                    <div sor-share-container-mobile>
+                        <% if(data.content?.extraInfo?.info_2) {%>
+                        <div class="d-flex" sor-share-step-badge-title schema-prop="data.content.extraInfo.info_2">
+                            <div><%- data.content?.extraInfo?.info_2 %></div>
+                            <div></div>
+                        </div>
+                        <% } %>
+
+                        <div sor-share-titles-container class="f-3 primary-color">
+                            <h1 sor-share-title-mobile schema-prop="data.content.mobile.shareStep.title">
+                                <%- data.content?.mobile?.shareStep?.title %>
+                            </h1>
+
+                            <% if(data.content?.mobile?.shareStep?.subtitle) { %>
+                            <h2 sor-share-subtitle-mobile schema-prop="data.content.mobile.shareStep.subtitle">
+                                <%- data.content?.mobile?.shareStep?.subtitle %>
+                            </h2>
+                            <% } %>
+                        </div>
+
+                        <div sor-share-panel-container class="f-10">
+
+                            <!-- LOADER -->
+                            <div sor-loader>
+                                <span class="loader"></span>
+                                <%- data.content.shareStep?.sharingMessage %>
+                            </div>
+                            <div sor-share-panel-social-option-container class="d-flex f-1">
+                                <!-- CONSIDER USING RADIO -->
+                                <% Object.keys(data.content.socialShareOptions).forEach(function(key){
+                                    if(key=='FALLBACK' || (!data.content.socialShareOptions[key].showOn ||
+                                    !data.content.socialShareOptions[key].showOn.find(so=> so ==
+                                    'MOBILE' || so == 'ALL'))) return; %>
+                                    <div sor-share-panel-social-option-item="<%= key %>">
+                                        <img sor-share-panel-social-option-item-ico src="<%- data.content.socialShareOptions[key].icon %>" alt="" />
+                                    </div>
+                                    <% }); %>
+                            </div>
+                            <div sor-share-panel-social-option-preview-container class="d-flex f-3 column">
+                                <div sor-share-panel-post-preview-image class="d-flex"></div>
+                                <div sor-share-panel-social-option-preview-title class="d-flex"></div>
+                                <div sor-share-panel-social-option-preview-description class="d-flex"></div>
+                                <div sor-share-panel-social-option-preview-link class="d-flex"></div>
+                                <div class="d-flex">
+                                    <button sor-share-panel-social-option-preview-share-btn></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% if(data.content?.extraInfo?.info_1) { %>
+                        <div sor-share-step-bottom-belt schema-prop="data.content.extraInfo.info_1">
+                            <%- data.content?.extraInfo?.info_1 %>
+                        </div>
+                        <% } %>
+
+                        <div class="d-flex f-2" sor-footer>
+                            <% data.content.footer.paragraphs.forEach(function(paragraph){ %>
+                            <p><%- paragraph %></p>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NAVIGATION DOTS -->
+            <div sor-navigation-dots>
+
+                <div sor-navigation-dots-group>
+                    <%data.content?.mobile?.stepsOrder.forEach(function (item) { %>
+                        <span sor-navigation-dot="<%- item %>"></span>
+                        <% }); %>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- DESKTOP -->
+        <div sor-desktop-container>
+            <!-- TOGGLE BUTTON -->
+            <button sor-btn-toggle sor-toggle>
+                <% if(cpvGv.minimizationEnabled) { %>
+                    <img src="<%- data.style?.minimizeButtonIconUrl %>" alt="">
+                <% } else { %>
+                    <img src="<%- data.style?.closeButtonIconUrl %>" alt="">
+                <% } %>
+            </button>
+            <div class="siblings-panel" sor-hero-image-container-desktop>
+                <div class="d-flex f-1" sor-hero-image-desktop>
+                    <% if(data.content?.desktop?.heroImageOverInfo) { %>
+                    <div sor-hero-image-over-info schema-prop="data.content.desktop.heroImageOverInfo" class="primary-color">
+                        <%- data.content.desktop.heroImageOverInfo %>
+                    </div>
+                    <%} %>
+                </div>
+            </div>
+
+            <div class="siblings-panel d-flex f-1 column">
+                <div class="d-flex f-1 column" sor-descritive-container-desktop>
+
+                    <!-- USER_INFO_CAPTURE -->
+                    <div class="d-flex f-10 column space-around <%- showDesktopStepOnLoad("USER_INFO_CAPTURE") %>"
+                        sor-step-desktop="USER_INFO_CAPTURE"
+                        >
+                        <div sor-user-info-instruction-container class="d-flex f-3 column">
+                            <div sor-user-info-capture-title-container-desktop>
+                                <h1 sor-user-info-capture-title-desktop schema-prop="data.content.desktop.userInfoCaptureStep.title" class="primary-color">
+                                    <%- data.content?.desktop?.userInfoCaptureStep?.title %>
+                                </h1>
+                            </div>
+                            <div sor-user-info-capture-subtitle-container-desktop>
+                                <h2 sor-user-info-capture-subtitle-desktop schema-prop="data.content.desktop.userInfoCaptureStep.subtitle" class="primary-color">
+                                    <%- data.content?.desktop?.userInfoCaptureStep?.subtitle %>
+                                </h2>
+                            </div>
+                            
+                            <% if(data.content?.desktop?.userInfoCaptureStep?.extraParagraphs?.length > 0) { %>
+                            <div sor-user-info-capture-extra-paragraph-container-desktop class="primary-color">
+                                <% data.content?.desktop?.userInfoCaptureStep?.extraParagraphs?.forEach(function(paragraph){ %>
+                                    <p sor-user-info-capture-extra-paragraph-desktop><%-paragraph %></p>
+                                    <% });%>
+                            </div>
+                            <% } %>
+                        </div>
+
+                        <div sor-user-info-form-container class="d-flex f-3 column">
+                            <!-- CAPTURE USER INFO FORM -->
+                            <form action="" sor-user-info-form>
+                                <input type="text" required
+                                    placeholder="<%- data.content.userInfoFirstNameInputPlaceholder %>"
+                                    sor-user-info-input-first-name-form />
+                                <input type="email" required
+                                    placeholder="<%- data.content.userInfoEmailInputPlaceholder %>"
+                                    sor-user-info-input-email-form />
+                                <button type="submit" sor-submit-user-info-btn schema-prop="data.content.userInfoSubmitButtonText">
+                                    <%- data.content.userInfoSubmitButtonText %>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- SHARE -->
+                    <div sor-step-desktop="SHARE" class="d-flex f-10 column <%- showDesktopStepOnLoad("SHARE") %>">
+                        <div sor-share-instruction-container-desktop class="d-flex f-1 column">
+                            <div sor-share-title-container-desktop>
+                                <h1 sor-share-title-desktop class="primary-color" schema-prop="data.content.desktop.shareStep.title">
+                                    <%- data.content?.desktop?.shareStep?.title  %>
+                                </h1>
+                            </div>
+                            <div sor-share-subtitle-container-desktop>
+                                <h2 sor-share-subtitle-desktop class="primary-color" schema-prop="data.content.desktop.shareStep.subtitle">
+                                    <%- data.content?.desktop?.shareStep?.subtitle %>
+                                </h2>
+                            </div>
+                            <div sor-share-extra-paragraph-container-desktop class="primary-color">
+                                <% data.content?.shareStep?.extraParagraphs?.forEach(function(paragraph){ %>
+                                    <p sor-share-extra-paragraph-desktop><%-paragraph %></p>
+                                    <% });%>
+                            </div>
+                        </div>
+                        <div sor-share-container-desktop>
+                            <div sor-share-panel-container class="d-flex f-1 column">
+                                <div sor-loader>
+                                    <span class="loader"></span>
+                                    <%- data.content.shareStep?.sharingMessage %>
+                                </div>
+                                <div sor-share-panel-social-option-container class="d-flex f-1">
+                                    <!-- CONSIDER USING RADIO -->
+                                    <% Object.keys(data.content.socialShareOptions).forEach(function(key){
+                                        if(key=='FALLBACK' || (!data.content.socialShareOptions[key].showOn ||
+                                        !data.content.socialShareOptions[key].showOn.find(so=> so == 'DESKTOP' || so ==
+                                        'ALL'))) return;
+                                        %>
+                                        <div sor-share-panel-social-option-item="<%= key %>">
+                                            <img sor-share-panel-social-option-item-ico src="<%- data.content.socialShareOptions[key].icon %>" alt="" />
+                                        </div>
+                                        <% }); %>
+                                </div>
+                                <div sor-share-panel-social-option-preview-container class="d-flex f-3 column">
+                                    <div sor-share-panel-social-option-preview-title class="d-flex f-1"></div>
+                                    <div sor-share-panel-social-option-preview-description class="d-flex f-2"></div>
+                                    <div sor-share-panel-social-option-preview-link class="d-flex f-1"></div>
+                                    <div sor-share-panel-social-option-preview-share-btn-container class="d-flex f-2">
+                                        <button sor-share-panel-social-option-preview-share-btn></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% if(data.content?.extraInfo.info_1) { %>
+                        <div class="d-flex" sor-share-panel-extra-bottom-info schema-prop="data.content.extraInfo.info_1">
+                            <%- data.content?.extraInfo.info_1 %>
+                        </div>
+                        <% } %>
+                    </div>
+
+                    <div class="d-flex f-1" sor-footer>
+                        <% data.content?.footer?.paragraphs?.forEach(function(paragraph){ %>
+                            <p sor-footer-paragraph-desktop><%- paragraph %></p>
+                            <% }); %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MINI -->
+        <div sor-mini-virtual-container class="dnone">
+
+            <div sor-mini-virtual-header>
+                <button sor-btn-toggle sor-toggle="close">
+                    <img src="<%- data.style?.closeButtonIconUrl %>" alt="">                
+                </button>
+            </div>
+            
+            <div sor-mini-container>
+                <div sor-mini-cover>
+
+                </div>
+                <div sor-mini-description-container>
+                    <div sor-mini-title schema-prop="data.content.mini.title">
+                        <%- data.content?.mini?.title %>
+                    </div>
+                    <div class="f-1">
+                        <button sor-mini-toggle-btn sor-toggle schema-prop="data.content.mini.toggleButtonText">
+                            <%- data.content?.mini?.toggleButtonText %>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <!-- TODO: we must migrate to a non dependent sdk model -->
+    <script id="reverb-sdk" src="<%- backUrl %>/scripts/reverb-placement-sdk.min.js"></script>
+    <script>
+
+        var __campaignVersionId = "<%- campaignVersionId %>";
+        var __socialShareOptionsConfig = <%- JSON.stringify(data.content.socialShareOptions) %> ;
+        var __shareStepDesktop = <%- JSON.stringify(data.content?.desktop?.shareStep) %>;
+        var __shareStepMobile = <%- JSON.stringify(data.content?.mobile?.shareStep) %>;
+        var __enhancedLogs = <%- JSON.stringify(data.content.enhancedLogs || false) %> ;
+        var __campaignVersionGlobalVars = <%- JSON.stringify(cpvGv) %> ;
+        var __buildHelper = <%- buildHelper ? JSON.stringify(buildHelper) : 'null' %> ;
+
+        // deprecated, this is only here to support the sdk dependecy
+        var campaignDetails = <%- JSON.stringify(campaignDetails) %>;
+
+        // UNDEFINED VALIDATION
+        if (!__campaignVersionId) console.error("MISSING VAR: __campaignVersionId");
+        if (!__socialShareOptionsConfig) console.error("MISSING VAR: __socialShareOptionsConfig");
+        if (!__campaignVersionGlobalVars) console.error("MISSING VAR: __campaignVersionGlobalVars");
+        if (!campaignDetails) console.error("MISSING VAR: campaignDetails");
+
+        <%- js %>
+
+        <%- buildHelperJs %>
+    </script>
+
+    <%- gtagJs %>
+</body>
+
+</html>

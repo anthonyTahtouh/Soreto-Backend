@@ -1,0 +1,196 @@
+html,body{ margin:0; padding:0; height:100%; width:100%; }
+
+/*.border{
+    border-style: solid;
+    border-width: 1px;
+    margin: 10px;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    text-align: centre;
+    width: 75%;
+}*/
+.container {
+    position: absolute;
+    /*background-size: 100% auto;*/
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    /*min-height: 100%;*/
+    height: 100%;
+    width: 100%;
+}
+
+.box {
+    position: relative;
+    padding: 40px 40px;
+    height: auto;
+    width: 500px;
+    margin: auto;
+    margin-top: 60px;
+    margin-bot: 60px;
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+.logo {
+    display: block;
+    position: relative;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    height: 120px;
+    width: 120px;
+}
+
+.line-separator{
+    width: 360px;
+    margin: 20px auto 0px auto;
+    height:1px;
+    background:#717171;
+    border-bottom:1px solid #898989;
+}
+
+::-webkit-input-placeholder {
+    color: #e1e1e1;
+}
+
+.input {
+    display: block;
+    position: relative;
+    padding: 6px 20px;
+    width: 360px;
+    height: 50px;
+    margin: 25px auto 0px auto;
+    font-family: 'Lato',sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #363636;
+    background-color: white;
+    border-style: solid;
+    border-color: #e1e1e1;
+    border-width: 1px;
+}
+
+.input:focus {outline:0;}
+
+.btn-container {
+    text-align: center;
+    position: relative;
+    width: 400px;
+    margin: 20px auto 0px auto;
+}
+
+.btn-facebook {
+    display: inline-block;
+    transition: all 0.5s ease;
+    width: 50px;
+    height: 50px;
+    margin: 0px 7px;
+    /*padding: 13px 16px;*/
+    border-radius: 25px;
+    background-color: #3b5998;
+}
+
+.btn-facebook span {
+    transition: all 0.5s ease;
+    color: white;
+    font-size: 28px;
+    margin-top: 13px;
+}
+
+.btn-facebook:hover {
+    background-color: #fff;
+}
+
+.btn-facebook:hover span {
+    color: #3b5998;
+}
+
+.btn-twitter {
+    display: inline-block;
+    transition: all 0.5s ease;
+    width: 50px;
+    height: 50px;
+    margin: 0px 7px;
+    /*padding: 12px 13px;*/
+    border-radius: 25px;
+    background-color: #4099ff;
+}
+
+.btn-twitter span {
+    transition: all 0.5s ease;
+    color: white;
+    font-size: 28px;
+    margin-top: 13px;
+}
+
+.btn-twitter:hover {
+    background-color: #fff;
+}
+
+.btn-twitter:hover span {
+    color: #3b5998;
+}
+
+.btn-pinterest {
+    display: inline-block;
+    transition: all 0.5s ease;
+    width: 50px;
+    height: 50px;
+    margin: 0px 7px;
+    /*padding: 13px 16px;*/
+    border-radius: 25px;
+    background-color: #AA2529;
+}
+
+.btn-pinterest span {
+    transition: all 0.5s ease;
+    color: white;
+    font-size: 28px;
+    margin-top: 13px;
+}
+
+.btn-pinterest:hover {
+    background-color: #fff;
+}
+
+.btn-pinterest:hover span {
+    color: #aa2529;
+}
+
+.auth-container {
+    text-align: center;
+    position: relative;
+    width: auto;
+    margin: 20px auto 0px auto;
+}
+
+.auth-container span {
+    display: block;
+    font-family: 'Lato', sans-serif;;
+    font-size: 16px;
+    color: #363636;
+    padding-bottom: 5px;
+}
+
+.btn-auth {
+    display: block;
+    transition: all 0.5s ease;
+    margin: 0 auto;
+    width: 150px;
+    height: 40px;
+    font-family: 'lato', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+    border: none;
+    background-color: #00a99d;
+}
+
+.btn-auth:hover {
+    background-color: #ed145b;
+}
+
+.btn-auth:focus {
+    outline: none
+}

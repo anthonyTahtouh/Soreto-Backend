@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="https://s3-eu-west-1.amazonaws.com/dist.soreto.com/clientsrc/site_soreto/images/favicon.png">
+    <title>Soreto</title>
+
+    <style type="">
+        
+        body {
+            background-image: url('https://dist.soreto.com/clientsrc/site_soreto/images/background_howitworks.jpg');
+            background-repeat: repeat;
+            background-size: cover;
+        }
+
+        .center {
+
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 40px;
+            background-color: white;
+            border-radius: 10px;
+            border-style: solid;
+            border-width: 2px;
+            border-color: #f53855;
+            text-align: center;
+        }
+
+        .logo {
+            float: left;
+            background: url("https://dist.soreto.com/clientsrc/site_soreto/images/soreto_alternative_logo.svg");
+                background-repeat: repeat;
+            width: 10em;
+            height: 3em;
+            background-repeat: no-repeat;
+            margin-top: 0.3em;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="logo"></div>
+    <div class="center">
+        <h3>Sorry</h3>
+        <%=message%>        
+    </div>
+
+    <script>
+        window.onload = function () {
+            let error = '<%= rawErrorStr %>';
+
+            if(error){
+                console.error(error);
+            }            
+        };
+    </script>
+</body>
+</html>

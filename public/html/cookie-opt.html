@@ -1,0 +1,638 @@
+<style>
+    
+    .soc_footer_selector {
+        width: 100%;
+        height: 12%;
+        background-color: white;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        animation-duration: 1000ms;
+        animation-name: animatebottom;
+        visibility: hidden;
+        border-top: solid;
+        border-width: 1px;
+        border-top-color: #aaa;
+    }
+
+    @-webkit-keyframes animatebottom {
+        from {
+            height: 0px;
+        }
+
+        to {
+            height: 12%;
+        }
+    }
+
+    @keyframes animatebottom {
+        from {
+            height: 0px;
+        }
+
+        to {
+            height: 12%;
+        }
+    }
+
+    .soc_footer_selector>.soc_left {
+        display: inline-block;
+        width: 60%;
+        padding: 10px;
+    }
+
+    .soc_footer_selector>.soc_right {
+        display: inline-block;
+        width: 40%;
+        position: absolute;
+    }
+
+    .soc_footer_selector .soc_title {
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    .soc_option_group {
+        float: right;
+        padding-top: 40px;
+        padding-right: 40px;
+    }
+
+    .soc_option_group_footer {
+        width: auto;
+        margin: auto;
+        padding-top: 25px;
+    }
+
+    .soc_default_btn {
+        background-color: #f53855;
+        border-color: #f53855;
+        color: white;
+        height: 40px;
+        cursor: pointer;
+    }
+
+    .soc_accept_btn {
+        width: 150px;
+    }
+
+    .soc_confirm_btn {
+        width: 200px;
+        margin: 20px;
+    }
+
+    .soc_manage_link {
+        color: inherit;
+        padding-right: 10px;
+    }
+
+    .soc_modal-window {
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.5);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 999;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s;
+    }
+
+    .soc_modal-window:target {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .soc_modal-window .soc_container {
+        width: 750px;
+        height: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /* padding: 10px; */
+        background: #fff;
+    }
+
+    .soc_modal-window .soc_container_dialog {
+        height: 300px;
+    }
+
+    .soc_modal-window .soc_header {
+        height: 13%;
+    }
+
+    .soc_modal-window .soc_container_dialog .soc_header{
+        height: 30%;
+    }
+
+    .soc_modal-window .soc_container_dialog .soc_body{
+        height: 40%;
+    }
+
+    .soc_modal-window .soc_body {
+        height: 70%;
+        border-top-style: solid;
+        border-bottom-style: solid;
+        border-width: 1px;
+        border-color: #aaa;        
+    }
+
+    .soc_modal-window .soc_cookie_footer {
+        height: 17%;
+        bottom: 0px;
+    }
+
+    .soc_modal-window .soc_header .soc_left {
+        float: left;
+        width: 30%;
+        height: 100%;
+        /* background-color: aqua; */
+    }
+
+    .soc_modal-window .soc_header .soc_right {
+        float: right;
+        width: 70%;
+        height: 100%;
+        position: relative;
+        /* background-color: rebeccapurple; */
+    }
+
+    .soc_modal-window .soc_body .soc_left {
+        width: 30%;
+        /* height: 100%; */
+        float: left;
+    }
+
+    .soc_modal-window .soc_body .soc_right {
+        float: right;
+        width: 69%;
+        height: 350px;
+        position: relative;
+        overflow-y: auto;
+    }
+
+    .soc_modal-window .soc_body .soc_opt {
+        /* height: 40px; */
+        /* border-top-style: solid; */
+        padding: 10px;
+        border-bottom-style: solid;
+        border-width: 1px;
+        border-color: #aaa;
+        font-size: 13px;
+        cursor: pointer;
+        background-color: #f5f6f8;
+    }
+
+    .soc_modal-window .soc_body .soc_selected {
+        background-color: white;
+        border-left: solid 5px #f53855;
+    }
+
+    .soc_modal-window .soc_body .soc_opt_content {
+        display: none;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .soc_sub {
+        padding-left: 10% !important;
+    }
+
+    .soc_modal-window .soc_body .soc_right .soc_menu_content_header {
+        font-weight: bold;
+        padding: 10px;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .soc_modal-window .soc_body .soc_right .soc_menu_content_header .soc_left {
+        float: left;
+        width: 50%;
+    }
+
+    .soc_modal-window .soc_body .soc_right .soc_menu_content_header .soc_right_switch {
+        float: right;
+        width: 50%;
+    }
+
+    .soc_modal-window .soc_body .soc_right .soc_menu_content_body {
+        padding: 10px;
+    }
+
+    .soc_modal-close {
+        color: #aaa;
+        line-height: 50px;
+        position: absolute;
+        right: 10px;
+        text-align: center;
+        top: 1px;
+        width: 20px;
+        text-decoration: none;
+    }
+
+    .soc_modal-close:hover {
+        color: black;
+    }
+
+    .soc_logo {
+        background-image: url(https://dist.soreto.com/clientsrc/site_soreto/images/soreto_alternative_logo.svg);
+        height: 100px;
+        width: 150px;
+        background-repeat: no-repeat;
+        margin: auto;
+        margin-top: 10px;
+    }
+
+    @media (min-width: 768px) {
+        .soc_mob_only {
+            display: none !important;
+        }
+    }
+    
+    @media (max-width: 767px) {
+
+        .soc_footer_selector {
+            height: 220px;
+        }
+
+        @-webkit-keyframes animatebottom {
+            from {
+                height: 0px;
+            }
+
+            to {
+                height: 220px;
+            }
+        }
+
+        @keyframes animatebottom {
+            from {
+                height: 0px;
+            }
+
+            to {
+                height: 220px;
+            }
+        }
+
+        .soc_footer_selector>.soc_left {
+            display: inherit;
+            width: 100%;
+            padding: 10px;
+        }
+
+        .soc_footer_selector>.soc_right {
+            display: inherit;
+            width: 100%;
+            position: absolute;
+            padding: 10px;
+            margin: auto;
+            bottom: 10px;
+        }
+
+        .soc_option_group {
+            float: none;
+            padding: 0px;
+        }
+
+        .soc_option_group_footer {
+            padding-top: 25px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        .soc_accept_btn {
+            float: right;
+        }
+
+        .soc_manage_link {
+            float: left;
+            padding-top: 7px;
+        }
+
+        .soc_confirm_btn {
+            width: 80%;
+            margin: auto;
+            display: block;
+            margin-top: 5%;
+        }
+
+        .soc_modal-window .soc_container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .soc_modal-window .soc_container_dialog {
+            
+            height: 50%;
+        }
+
+        .soc_modal-window .soc_header {
+            height: 10%;
+        }
+
+        .soc_modal-window .soc_body {
+            height: 75%;
+        }
+
+        .soc_modal-window .soc_body .soc_left {
+            float: none;
+            width: 100%;
+        }
+
+        .soc_modal-window .soc_body .soc_right {
+            float: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .soc_modal-window .soc_body .soc_opt {
+
+            border-top-style: solid;
+        }
+
+        .soc_modal-window .soc_body .soc_selected {
+            border-bottom: none;
+        }
+
+        .soc_desk_only {
+            display: none !important;
+        }
+    }
+</style>
+
+<style>
+    .switch {
+        position: relative;
+        /* display: inline-block; */
+        width: 35px;
+        height: 20px;
+        float: right;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 15px;
+        width: 15px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #f53855;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #f53855;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(15px);
+        -ms-transform: translateX(15px);
+        transform: translateX(15px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 16px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+</style>
+
+<div class="soc_footer_selector">
+
+    <div class="soc_left">
+        <p class="soc_title">
+            Cookies
+        </p>
+        <p>
+            We use cookies (you know the ones) to make your online experience with us as joyful as possible. By
+            continuing to use our site, you are agreeing to our use of cookies. <a href="https://www.soreto.com/privacy/" target="blank">Read more ...</a>
+        </p>
+    </div>
+    <div class="soc_right">
+        <div class="soc_option_group">
+            <a href="#open-modal" class="soc_manage_link">Manage cookies</a>
+            <button name="soc_accept_btn" class="soc_default_btn soc_accept_btn">Accept & Proceed</button>
+        </div>
+    </div>
+</div>
+
+<div id="open-modal" class="soc_modal-window">
+
+    <div class="soc_container">
+        <div class="soc_header">
+
+            <div class="soc_left">
+                <div class="soc_logo"></div>
+            </div>
+            <div class="soc_right">
+                <a href="#" title="Close" class="soc_modal-close">
+
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000"
+                        xml:space="preserve">
+                        <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+                        <g>
+                            <path d="M10,39.4c0,8.8,2.9,14.7,8.8,20.6l441.4,441.4L21.8,940c-5.9,5.9-8.8,11.8-8.8,20.6c0,5.9,2.9,14.7,8.8,20.6c5.9,5.9,11.8,8.8,20.6,8.8c5.9,0,14.7-2.9,20.6-8.8l438.5-438.5L940,981.2c5.9,5.9,11.8,8.8,20.6,8.8c5.9,0,14.7-2.9,20.6-8.8c2.9-5.9,8.8-14.7,8.8-20.6c0-8.8-5.9-14.7-8.8-20.6L542.7,501.5L981.2,60c5.9-5.9,8.8-11.8,8.8-20.6c0-5.9-2.9-14.7-8.8-20.6c-5.9-2.9-11.8-8.8-20.6-8.8c-5.9,0-14.7,5.9-20.6,8.8L501.5,460.3L60,18.8C54.1,15.9,48.2,10,39.4,10c-5.9,0-14.7,5.9-20.6,8.8C13,24.7,10,33.5,10,39.4z" />
+                        </g>
+                    </svg>
+
+                </a>
+            </div>
+        </div>
+
+        <div class="soc_body">
+            <div class="soc_left">
+                <div name="menu_1" class="menu_1 soc_opt soc_desk_only">Your Privacy</div>
+                <div name="menu_2" class="menu_2 soc_opt soc_desk_only">Strictly Necessary Cookies</div>
+                <div name="menu_3" class="menu_3 soc_opt soc_desk_only">Performance Cookies</div>
+                <div name="menu_4" class="menu_4 soc_opt soc_desk_only">Optional cookies</div>
+            </div>
+            <div class="soc_right">
+                <div name="menu_1" class="menu_1 soc_opt soc_mob_only">Your Privacy</div>
+                <div name="menu_1_content" class="menu_1 soc_opt_content">
+                    <div class="soc_menu_content_header soc_desk_only">
+                        <div class="soc_left">
+                            Your Privacy
+                        </div>
+                    </div>
+                    <div class="soc_menu_content_body">
+                        When you visit any website, it may store or retrieve information on your browser, mostly in
+                        the form of cookies. This information might be about you, your preferences or your device
+                        and is mostly used to make the site work as you expect it to. The information does not
+                        usually directly identify you, but it can give you a more personalized web experience.
+                        Because we respect your right to privacy, you can choose not to allow some types of cookies.
+                        Click on the different category headings to find out more and change our default settings.
+                        However, blocking some types of cookies may impact your experience of the site and the
+                        services we are able to offer.
+                        <p>
+                            <a href="https://cookiepedia.co.uk/giving-consent-to-cookies">More Information</a>
+                        </p>
+                    </div>
+                </div>
+                <div name="menu_2" class="menu_2 soc_opt soc_mob_only">Strictly Necessary Cookies</div>
+                <div name="menu_2_content" class="menu_2 soc_opt_content">
+                    <div class="soc_menu_content_header soc_desk_only">
+                        <div class="soc_left">
+                            Strictly Necessary Cookies
+                        </div>
+                    </div>
+                    <div class="soc_menu_content_body">
+                        These cookies are necessary for the website to function and cannot be switched off in our
+                        systems. They are usually only set in response to actions made by you which amount to a
+                        request for services, such as setting your privacy preferences, logging in or filling in
+                        forms. You can set your browser to block or alert you about these cookies, but some parts of
+                        the site will not then work. These cookies do not store any personally identifiable
+                        information.
+                    </div>
+                </div>
+                <div name="menu_3" class="menu_3 soc_opt soc_mob_only">Performance Cookies</div>
+                <div name="menu_3_content" class="menu_3 soc_opt_content">
+                    <div class="soc_menu_content_header soc_desk_only">
+                        <div class="soc_left">
+                            Performance Cookies
+                        </div>
+                    </div>
+                    <div class="soc_menu_content_body">
+                        These cookies allow us to get to know how you use our website. They’re used to analyse
+                        visitor information such as usage and visitor numbers, so they help us to see how effective
+                        our advertising is and understand what you like. We also use this information to help
+                        improve our website, make our marketing more relevant and improve your experience. The data
+                        used for these cookies is aggregated and anonymised, which means that we can’t identify you
+                        as an individual. In other words, your personal data is not used for these cook.
+                    </div>
+                </div>
+                <div name="menu_4" class="menu_4 soc_opt soc_mob_only">Optional cookies</div>
+                <div name="menu_4_content" class="menu_4 soc_opt_content">
+                    <div class="soc_menu_content_header">
+                        <div class="soc_left">Optional cookies</div>
+                        <div class="soc_right_switch">
+                            <label class="switch">
+                                <input name="cookies_optional" class="soreto_cookie_option" type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="soc_menu_content_body">
+                        When you visit our website, we store cookies on your browser to collect information. The
+                        information collected might relate to you, your preferences or your device, and is mostly
+                        used to make the site work as you expect it to and to provide a more personalized web
+                        experience. However, you can choose not to allow certain types of cookies, which may impact
+                        your experience of the site and the services we are able to offer. Click on the different
+                        category headings to find out more and change our default settings according to your
+                        preference. You cannot opt-out of our First Party Strictly Necessary Cookies as they are
+                        deployed in order to ensure the proper functioning of our website (such as prompting the
+                        cookie banner and remembering your settings, to log into your account, to redirect you when
+                        you log out, etc.). For more information about the First and Third Party Cookies used please
+                        follow this link.
+                    </div>
+                    <div class="soc_menu_content_header sub">
+                        <div class="soc_left">Functional Cookies</div>
+                        <div class="soc_right_switch">
+                            <label class="switch">
+                                <input name="cookies_functional" class="soreto_cookie_option" type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="soc_menu_content_body sub">
+                        These cookies enable the website to provide enhanced functionality and personalisation. They
+                        may be set by us or by third party providers whose services we have added to our pages. If
+                        you do not allow these cookies then some or all of these services may not function properly.
+                    </div>
+                    <div class="soc_menu_content_header sub">
+                        <div class="soc_left">Targeting Cookies</div>
+                        <div class="soc_right_switch">
+                            <label class="switch">
+                                <input name="cookies_targeting" class="soreto_cookie_option" type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="soc_menu_content_body sub">
+                        These cookies may be set through our site by our advertising partners. They may be used by
+                        those companies to build a profile of your interests and show you relevant adverts on other
+                        sites. They do not store directly personal information, but are based on uniquely
+                        identifying your browser and internet device. If you do not allow these cookies, you will
+                        experience less targeted advertising.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="soc_cookie_footer">
+            <button id="soc_confirm_btn" class="soc_default_btn soc_confirm_btn">Confirm My Choices</button>
+        </div>
+
+    </div>
+</div>
+
+<div id="accept-needed" class="soc_modal-window">
+    <div class="soc_container soc_container_dialog">
+        
+        <div class="soc_header">
+
+            <div class="soc_left">
+                <div class="soc_logo"></div>
+            </div>
+            <div class="soc_right">
+                <a href="#" title="Close" class="soc_modal-close">
+
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000"
+                        xml:space="preserve">
+                        <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+                        <g>
+                            <path d="M10,39.4c0,8.8,2.9,14.7,8.8,20.6l441.4,441.4L21.8,940c-5.9,5.9-8.8,11.8-8.8,20.6c0,5.9,2.9,14.7,8.8,20.6c5.9,5.9,11.8,8.8,20.6,8.8c5.9,0,14.7-2.9,20.6-8.8l438.5-438.5L940,981.2c5.9,5.9,11.8,8.8,20.6,8.8c5.9,0,14.7-2.9,20.6-8.8c2.9-5.9,8.8-14.7,8.8-20.6c0-8.8-5.9-14.7-8.8-20.6L542.7,501.5L981.2,60c5.9-5.9,8.8-11.8,8.8-20.6c0-5.9-2.9-14.7-8.8-20.6c-5.9-2.9-11.8-8.8-20.6-8.8c-5.9,0-14.7,5.9-20.6,8.8L501.5,460.3L60,18.8C54.1,15.9,48.2,10,39.4,10c-5.9,0-14.7,5.9-20.6,8.8C13,24.7,10,33.5,10,39.4z" />
+                        </g>
+                    </svg>
+
+                </a>
+            </div>
+        </div>
+
+        <div class="soc_body">
+            <div style="margin: auto; margin-top:5%; width: 80%; text-align: center;">
+                <h2>You must accept cookies before move on!</h2>
+            </div>
+        </div>
+
+        <div class="soc_cookie_footer">
+            <div class="soc_option_group soc_option_group_footer">
+                <a href="#open-modal" class="soc_manage_link">Manage cookies</a>
+                <button name="soc_accept_btn" class="soc_default_btn soc_accept_btn">Accept & Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>

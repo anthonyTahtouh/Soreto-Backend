@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta property="og:title" content="<%= title %>" />
+  <meta property="og:description" content="Get <%= discountValue %>% off at Nobody's Child: Delivering the latest fashion, style and trends, without compromising our ethical standards. Great looking, great quality clothing, which is fast, but not throwaway.  ." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/s3-reverb-hosting-prod/assets/nc_dc_page/smallbox.jpg" />
+  <title><%= title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+    * {
+      -webkit-box-sizing: border-box;
+      /* Safari/Chrome, other WebKit */
+      -moz-box-sizing: border-box;
+      /* Firefox, other Gecko */
+      box-sizing: border-box;
+      /* Opera/IE 8+ */
+    }
+
+    @font-face {
+        font-family: FuturaPTBook;
+        src: url('<%= hostingSrc %>/assets/nc_fonts/FuturaPTBook.otf');
+    }
+    @font-face {
+        font-family: FuturaPTHeavy;
+        src: url('<%= hostingSrc %>/assets/nc_fonts/FuturaPTHeavy.otf');
+    }
+
+    .card {
+      border: solid rgba(0, 0, 0, 0.74) 2px;
+      max-width: 500px;
+      text-align: center;
+      margin: 0 auto;
+      font-family: 'FuturaPTBook','Nunito Sans', sans-serif;
+    }
+    @media only screen and (min-width: 450px) {
+      .card {
+        margin-top: 70px;
+      }
+    }
+    .card .card-inner {
+      margin: 40px auto;
+      max-width: 300px;
+      padding: 20px 15px;
+    }
+    .card .copy {
+      margin: 55px 15px 12px;
+    }
+    .card .copy .use-code{
+      margin-top: 20px;
+    }
+    .card .logo {
+      background: url("https://media.nobodyschild.com/media/logo/stores/1/logo_1.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      -webkit-background-size: contain;
+      background-size: contain;
+      height: 95px;
+    }
+    .card .code-holder {
+      padding: 12px 7px;
+      margin: 15px;
+      margin: 0px auto;
+      /*http://www.cssmatic.com/box-shadow*/
+      border: solid 1px #d0cccc;
+      width: 70%;
+/*      -webkit-box-shadow: inset 3px 3px 0px -1px rgba(0, 0, 0, 0.42);
+      box-shadow: inset 3px 3px 0px -1px rgba(0, 0, 0, 0.42);
+      background: #E2E3E6;*/
+    }
+    .value-prop{
+      font-size: 1.1em
+    }
+    .hash{
+      font-size: 1.13em;
+    }
+    .card .code {
+      display: inline-block;
+      width: 83%;
+      letter-spacing: 3px;
+      letter-spacing: 1.5px;
+    }
+    .card .copy-btn {
+      display: inline-block;
+      padding: 13px 0px;
+      font-size: 0.9em;
+      background: rgba(0, 0, 0, 0.84) 2px;;
+      color: white;
+      width: 30%;
+      transition: background-color 1s ease-out;
+    }
+    .card .copy-btn:hover {
+      transition: background 0.5s ease;
+    background:rgba(68, 67, 67, 0.94) 2px
+    }
+    .code-bar {
+      display: inline-flex;
+      width: 100%;
+    }
+    .hold-up{
+      color: #7f7c7c;
+    }
+
+    .card .cta-btn {
+      /*border: solid rgba(0, 0, 0, 0.52) 1px;*/
+      width: 100%;
+
+      display: inline-block;
+      color: white;
+      background-color: #00c27e ;
+      margin: 16px auto;
+      padding: 14px 15px;
+      text-decoration:  none;
+    }
+  </style>
+    <!-- Hotjar Tracking Code for i.soreto.com -->
+  <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:906440,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+</head>
+
+<body onload="onLoad()">
+  <div class='card'>
+  <div class='card-inner'>
+    <div class='logo'></div>
+    <div class='copy'>
+      <span class='hold-up'>Hold up – it gets better!</span><br/><br/>
+      <span class='value-prop'>
+        Fancy <%= discountValue %>% off site-wide?<br/>
+      </span>
+      <div class='use-code'>Use Code:</div>
+
+    </div>
+    <div class="code-bar">
+      <div data-clipboard-target="#code" class='code-holder codebtn'>
+        <div id='code' class='code'><%= discountCode %></div>
+      </div>
+      <div class='copy-btn'>
+        Copy Now
+      </div>
+    </div>
+    <a class='cta-btn'>www.nobodyschild.com</a>
+  </div>
+</div> 
+<script type="text/javascript">
+var copyBtn = document.getElementsByClassName('copy-btn')[0];
+var code = document.getElementsByClassName('code')[0];
+var ctaBtn = document.getElementsByClassName('cta-btn')[0];
+var codeBar = document.getElementsByClassName('code-bar')[0];
+var copiedOnce = false;
+
+codeBar.addEventListener('click',function(){
+  sendTracking('interstitial-code-click','true')
+},{ once: true });
+
+copyBtn.addEventListener('click',function(){
+  
+  copyBtn.classList.add('Copied');
+  copyBtn.innerText = 'Copied';
+  select_all_and_copy(code);
+  if (!copiedOnce){
+    sendTracking('interstitial-copy-cta','true')
+  }
+  copiedOnce = true
+})
+
+ctaBtn.addEventListener('click',function(e){
+  e.preventDefault();
+  e.stopPropagation();
+  var self = this;
+  var redirect = function(){
+  window.location.href= "<%= productUrl %>"
+  }
+  sendTracking('interstitial-cta','true',redirect())
+});
+
+function onLoad(){
+  sendTracking('interstitial-loaded','true')
+}
+
+function sendTracking(trackingString,value,cb){
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "<%= apiBaseUrl %>/api/v1/tracking", true);
+  xhttp.withCredentials = true;
+  xhttp.setRequestHeader("Content-type", "application/json");
+  xhttp.send(JSON.stringify({clientId:"<%= clientId %>",type: trackingString ,value: value }));
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState === 4) {
+      if(cb){
+      cb();
+      }
+      return;
+    }
+  }
+}
+
+function select_all_and_copy(e){if(document.body.createTextRange){var n=document.body.createTextRange();n.moveToElementText(e),n.select(),n.execCommand("Copy")}else if(window.getSelection&&document.createRange){var t=e.contentEditable,o=e.readOnly;e.contentEditable=!0,e.readOnly=!1;var a=document.createRange();a.selectNodeContents(e);var d=window.getSelection();if(d.removeAllRanges(),d.addRange(a),("TEXTAREA"==e.nodeName||'INPUT'==e.nodeName)&&e.select(),e.setSelectionRange&&navigator.userAgent.match(/ipad|ipod|iphone/i)&&e.setSelectionRange(0,999999),e.contentEditable=t,e.readOnly=o,document.queryCommandSupported("copy")){document.execCommand('copy')}}}
+
+</script>
+
+</body>
+
+</html>

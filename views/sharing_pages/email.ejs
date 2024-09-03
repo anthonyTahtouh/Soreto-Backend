@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Share via email</title>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+    body {
+    margin: 0px;
+    font-family: arial;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  .wrapper {
+    margin:auto;
+    font-size: 18px;
+    max-width: 340px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-height: 500px;
+    min-height: 180px;
+  }
+  .wrapper.hidden{
+    display:none;
+  }
+
+  label {
+    margin-top: 10px;
+  }
+
+  input,
+  textarea {
+    border: 1px solid #888;
+    resize: none;
+    font-size: 17px;
+  }
+
+  textarea {
+    margin-top: 15px;
+    flex-grow: 1;
+  }
+
+  .wrapper > * {
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .cta {
+    color: #00b5ad;
+    border: 3px solid #00b5ad;
+    text-align: center;
+  }
+
+  .logo {
+    margin: auto;
+    background: url("https://s3-eu-west-1.amazonaws.com/s3-reverb-hosting-prod/assets/logo.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-grow: 0.8;
+  }
+  .capatcha-wrapper {
+    padding:10px 0px;
+    margin: auto;
+    text-align: -webkit-center;
+  }
+  .thank-you{
+    text-align: -webkit-center;
+
+  }
+  .mail-image{
+    margin: 0px auto;
+    background: url('https://s3-eu-west-1.amazonaws.com/s3-reverb-hosting-prod/assets/assets-email-success-01.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-grow: 0.8;
+    background-size: contain;
+  }
+</style>
+
+  <form id='form' class='wrapper' action="<%= backUrl %>/api/v1/sharedurls/shareEmail"  method="post" >
+    <div class='logo'></div>
+    <label>Enter your friend e-mail here...</label>
+    <input id='email' name="email" placeholder='email@example.com' required  type="email" class='email-input'></input>
+    <input type="hidden" id='sharingLink' value="<%= sharingUrl %>" name="sharingLink" />
+    <input type="hidden" id='campaignVersionId' value="<%= campaignVersionId %>" name="campaignVersionId" />
+    <input type="hidden" id='sharerFirstname' value="<%= sharerFirstname %>" name="sharerFirstname" />
+    
+    <textarea id='message' name="message" ><%= placeholderMessage %></textarea>
+    <div class='capatcha-wrapper'>
+      <div class="g-recaptcha" data-sitekey="<%= dataSiteKey %>"></div>
+    </div>
+    
+    <input type="submit" value="SEND IT" class='button cta'></input>
+  </form>
+  <div id='thank-you' class='thank-you wrapper hidden'>
+    <div class='mail-image'>
+    </div>
+    <div class="sub-header">
+      Thank you!
+    </div>
+    <div class="sub-text">
+      Your email has been sent
+    </div>
+
+  </div>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+  <script>
+  window.resizeTo(390, 560)
+  var form = document.getElementById('form');
+  form.addEventListener("submit", function(event){
+    event.preventDefault();
+    if (grecaptcha.getResponse() === '') {
+      alert('Please check the recaptcha');
+      return;
+    }
+    var form = $('#form')
+    var url =  form.attr( 'action' );
+    var posting = $.post( url, { 
+      email: $('#email').val(),
+      sharingLink: $('#sharingLink').val(),
+      campaignVersionId: $('#campaignVersionId').val(),
+      sharerFirstname: $('#sharerFirstname').val(),
+      message: $('#message').val(),
+      "g-recaptcha-response": grecaptcha.getResponse(),
+    } );
+    posting.done(function( data ) {
+      form.addClass('hidden')
+      $('#thank-you').removeClass('hidden')
+      setTimeout(function(){ window.close() }, 2000);
+    });
+  }
+, false);
+
+
+  </script>
+</body>
+</html>

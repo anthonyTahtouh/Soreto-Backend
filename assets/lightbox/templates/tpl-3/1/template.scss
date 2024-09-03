@@ -1,0 +1,995 @@
+// this import path is resolved programmatically
+// do not worry about the missing file
+@import 'utils-1.scss';
+
+
+//
+// Default font
+//
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+
+//
+//
+// Custom fonts
+//
+//
+
+// 1
+<% if(data.style?.customFonts?.customFont1) { %>
+    
+    @font-face {
+        font-family: 'custom-font-1';
+        src: url("<%- data.style?.customFonts?.customFont1 %>");
+    }
+
+<%}%>
+
+// 2
+<% if(data.style?.customFonts?.customFont2) { %>
+    
+    @font-face {
+        font-family: 'custom-font-2';
+        src: url("<%- data.style?.customFonts?.customFont2 %>");
+    }
+
+<%}%>
+
+// 3
+<% if(data.style?.customFonts?.customFont3) { %>
+    
+    @font-face {
+        font-family: 'custom-font-3';
+        src: url("<%- data.style?.customFonts?.customFont3 %>");
+    }
+
+<%}%>
+
+// font face 1
+<% if(data.style?.customFonts?.customFontFace1?.url) { %>
+    @import url("<%- data.style?.customFonts?.customFontFace1?.url %>");
+<%}%>
+
+// font face 2
+<% if(data.style?.customFonts?.customFontFace2?.url) { %>
+    @import url("<%- data.style?.customFonts?.customFontFace2?.url %>");
+<%}%>
+
+// font face 3
+<% if(data.style?.customFonts?.customFontFace3?.url) { %>
+    @import url("<%- data.style?.customFonts?.customFontFace3?.url %>");
+<%}%>
+
+<%
+    // Font priority methods
+
+    // give the priority to the font 1
+    var  primaryFontPrior = conditionalStyle('font-family', 
+        data.style?.customFonts?.customFontFace1?.fontFamily || 
+        data.style?.customFonts?.customFontFace2?.fontFamily || 
+        (
+            data.style?.customFonts?.customFont1 ? 
+            'custom-font-1' : 
+            (
+                    data.style?.customFonts?.customFont2 ? 
+                    'custom-font-2': 
+                    null 
+            )
+        ), "Montserrat");
+
+    // give the priority to the font 2
+    var  secondaryFontPrior = conditionalStyle('font-family', 
+        data.style?.customFonts?.customFontFace2?.fontFamily || 
+        data.style?.customFonts?.customFontFace1?.fontFamily || 
+        (
+            data.style?.customFonts?.customFont2 ? 
+            'custom-font-2' : 
+            (
+                    data.style?.customFonts?.customFont1 ? 
+                    'custom-font-1': 
+                    null 
+            )
+        ), "Montserrat");
+%>
+
+*{
+    transition: all 150ms linear;
+    <%- primaryFontPrior  %> ;
+}
+
+*:focus {
+    outline: none;
+}
+
+input {
+            
+    &::-webkit-input-placeholder {
+        <%- primaryFontPrior  %> ;
+    }
+
+    &::-moz-placeholder {
+        <%- primaryFontPrior  %> ;
+    }
+
+    &::-ms-placeholder {
+        <%- primaryFontPrior  %> ;
+    }
+
+    &::placeholder {
+        <%- primaryFontPrior  %> ;
+    }
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-size: 180%;
+    font-weight: 650;
+    margin: 0px;
+    <%- secondaryFontPrior %>;
+}
+
+h2 {
+    font-size: 90%;
+    font-weight: 400;
+    margin: 0px;
+    <%- primaryFontPrior %>;
+}
+
+a {
+    color: inherit;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+.primary-color {
+    <%- conditionalStyle('color', data.style?.primaryColor, '#000000') %>
+}
+
+[sor-main-container] {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+[sor-desktop-container] {
+    display: none;
+}
+
+[sor-btn-toggle] {
+    @include flexCenter();
+    position: fixed;
+    width: 25px;
+    height: 25px;
+    background-color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 999;
+    padding: 0px;
+
+    img {
+        width: 11px;
+    }
+}
+
+[sor-share-panel-container] {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    [sor-loader] {
+        display: none;
+    }
+
+    &.sharing {
+        [sor-loader] {
+            @include flexCenter();
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            background-color: #838083a2;
+            color: #ffffff;
+            z-index: 1000;
+        }
+    }
+}
+
+$social-platform-order: (
+    WHATSAPP: <%- data.content?.socialShareOptions?.WHATSAPP?.order || 0 %>,
+    FACEBOOK: <%- data.content?.socialShareOptions?.FACEBOOK?.order || 0 %>,
+    TWITTER: <%- data.content?.socialShareOptions?.TWITTER?.order || 0 %>,
+    INSTAGRAM: <%- data.content?.socialShareOptions?.INSTAGRAM?.order || 0 %>,
+    MESSENGER: <%- data.content?.socialShareOptions?.MESSENGER?.order || 0 %>,
+    PINTEREST: <%- data.content?.socialShareOptions?.PINTEREST?.order || 0 %>,
+    LINK: <%- data.content?.socialShareOptions?.LINK?.order || 0 %>,
+    TELEGRAM: <%- data.content?.socialShareOptions?.TELEGRAM?.order || 0 %>,
+    SNAPCHAT: <%- data.content?.socialShareOptions?.SNAPCHAT?.order || 0 %>,
+    EMAIL: <%- data.content?.socialShareOptions?.EMAIL?.order || 0 %>,
+);
+
+//  0 - platform      
+//  1 - border top color
+//  2 - share button color
+//  3 - icon color (this color must be defined also on utils-1.scss)  
+//  4 - showing order
+$social-platform: (
+        // 0        // 1          // 2          // 3          // 4
+    (   WHATSAPP,   #25d366,    #25d366,    #32d851,    map-get($social-platform-order, WHATSAPP)  ),
+    (   FACEBOOK,   #005efd,    #005efd,    #005efd,    map-get($social-platform-order, FACEBOOK)  ),
+    (   TWITTER,    #000000,    #000000,    #000000,    map-get($social-platform-order, TWITTER)   ),
+    (   INSTAGRAM,  #d0316a,    #d0316a,    #000001,    map-get($social-platform-order, INSTAGRAM) ),
+    (   MESSENGER,  #007cf7,    #007cf7,    #007cf7,    map-get($social-platform-order, MESSENGER) ),
+    (   PINTEREST,  #e60023,    #e60023,    #df0022,    map-get($social-platform-order, PINTEREST) ),
+    (   LINK,       #4c4c52,    #4c4c52,    #4c4c52,    map-get($social-platform-order, LINK)      ),
+    (   TELEGRAM,   #28a8e9,    #28a8e9,    #28a8e9,    map-get($social-platform-order, TELEGRAM)  ),
+    (   SNAPCHAT,   #9c9c00,    #9c9c00,    #9c9c00,    map-get($social-platform-order, SNAPCHAT)  ),
+    (   EMAIL,      #5f60de,    #5f60de,    #5f60de,    map-get($social-platform-order, EMAIL)  ),
+);
+
+// DISCLAIMER: instagram Icon color '#000001' is only to ignore coloring the icon that is gradient colored
+
+@each $platform, $border-top-color, $share-button-color in $social-platform {
+
+    [sor-share-panel-container="#{$platform}"] {
+        [sor-share-panel-social-option-preview-container] {
+            border-top-color: $border-top-color !important;
+    
+            button {
+                background-color: $share-button-color;
+            }
+        }
+    }
+}
+
+[sor-share-panel-social-option-preview-container] {
+    background-color: #ffffff;
+    <%- conditionalStyle('border-color', data.style?.shareStep?.sharePreviewSelectedPlatformBorderColor, '#949494')  %> ;
+    border-style: solid;
+    border-width: 1px;
+    border-top-width: 2px;
+    padding: 20px 15px;
+
+    [sor-share-panel-social-option-preview-title] {
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    [sor-share-panel-social-option-preview-description] {
+        font-size: 12px;
+    }
+
+    [sor-share-panel-social-option-preview-link] {
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    [sor-share-panel-social-option-preview-share-btn] {
+        flex: 1;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    > * {
+        color: #000000;
+    }
+}
+
+[sor-share-panel-social-option-container] {
+    display: flex;
+    justify-content: space-between;
+    gap: 2%;
+    z-index: 999;
+}
+
+[sor-share-panel-social-option-item] {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px 10px 0px 0px;
+    &.active {
+        background-color: #ffffff;
+        margin-bottom: -2px;
+        border-style: solid;
+        border-width: 1px;
+        <%- conditionalStyle('border-color', data.style?.shareStep?.sharePreviewSelectedPlatformBorderColor, '#949494')  %> ;
+        border-bottom: none;
+    }
+
+    img {
+        width: 25px;
+    }
+
+    @each $platform, $one, $two, $icon-color, $order in $social-platform {
+        
+
+        &[sor-share-panel-social-option-item="#{$platform}"] {
+
+            img {
+                @include recolor($icon-color, 0.5);
+            }
+    
+            &.active {
+                img {
+                    @include recolor($icon-color, 1);
+                }
+            }       
+    
+            order: $order;
+        }
+    }
+}
+
+[sor-user-info-form] {
+    display: flex;
+    flex-direction: column;
+
+    input {
+        font-size: 12px;
+        height: 48px;
+        padding-left: 15px;
+        border-width: 1px;
+
+        // dynamic styles
+        <%- conditionalStyle('color', data.style?.input?.color, '#949494') %>
+        <%- conditionalStyle('background-color', data.style?.input?.backgroundColor, '#FFFFFF') %>
+        <%- conditionalStyle('border-style', data.style?.input?.borderStyle, 'solid') %>
+        <%- conditionalStyle('border-color', data.style?.input?.borderColor, '#d9d9d9') %>
+
+        <%- conditionalStyle('border-style', data.style?.input?.borderColor ? 'solid' : null) %>
+                
+        &::-webkit-input-placeholder {
+            <%- conditionalStyle('color', data.style?.input?.color, '#949494'); %>
+        }
+
+        &::-moz-placeholder {
+            <%- conditionalStyle('color', data.style?.input?.color, '#949494'); %>
+        }
+
+        &::-ms-placeholder {
+            <%- conditionalStyle('color', data.style?.input?.color, '#949494'); %>
+        }
+
+        &::placeholder {
+            <%- conditionalStyle('color', data.style?.input?.color, '#949494'); %>
+        }
+    }
+
+    [sor-user-info-input-email-form] {
+        margin-top: 10px;
+    }
+}
+
+[sor-submit-user-info-btn] {
+    color: #ffffff;
+    margin-top: 10px;
+    height: 44px;
+    font-size: 14px;
+    font-weight: 700;
+
+    <%- conditionalStyle('background-color', data.style?.userInfoCaptureSubmitButtonColor, '#000000'); %>;
+}
+
+[sor-user-info-capture-description-container-mobile] {
+    justify-content: space-evenly;
+    padding: 10px 20px;
+}
+
+[sor-share-container-mobile] {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 30px 15px 25px;
+
+    [sor-share-step-badge-title] {
+        @include flexCenter();
+        background-color: black;
+        color: white;
+        width: fit-content;
+        padding: 2px 5px;
+        font-weight: 700;
+        max-height: 15px;
+
+        > * {
+            color: white;
+        }
+    }
+}
+
+[sor-footer] {
+    color: #838083;
+    font-size: 09px;
+    text-align: center;
+    line-height: 15px;
+}
+
+[sor-mobile-container] {
+
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    <%- conditionalStyle('background-color', data.style?.mobile?.containerBgColor, '#FFFFFF') %>
+
+    h1 {
+        font-size: 110%;
+    }
+
+    h2 {
+        font-size: 70%;
+    }
+
+    .primary-color {
+        <%- conditionalStyle('color', data.style?.desktop?.primaryColor, '#000000') %>
+    }
+
+    a {
+        <%- conditionalStyle('color', data.style?.linkColor) %>;
+    }
+
+    [sor-cover-image-mobile] {
+        @include bgImage("<%= data.style?.mobile?.coverImageUrl %>");
+    
+        [sor-cover-image-over-info-title-container-mobile] {
+            color: white;
+            width: 80%;
+            margin-left: auto;
+            margin-top: 290px;
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            text-align: justify;
+    
+            [sor-cover-image-over-info-title-mobile] {
+                background-color: black;
+                padding: 3px 10px;
+                color: white;
+            }
+        }
+    
+        [sor-cover-image-over-info-container-mobile] {
+            @include flexCenter();
+            justify-content: flex-start;
+            background-color: white;
+            width: 80%;
+            height: 138;
+            margin-left: auto;
+            font-weight: 700;
+            font-size: 20px;
+            
+            [sor-cover-image-over-info-mobile] {
+                display: flex;
+                flex-direction: column;
+                gap: 7px;
+                margin-left: 15px;
+    
+                [sor-cover-image-over-info-btn-mobile] {
+                    background-color: black;
+                    color: white;
+                    border-radius: 20px;
+                    font-size: 13px;
+                    text-align: center;
+                    width: fit-content;
+                    padding: 10px 40px;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+
+    [sor-user-info-capture-hero-image] {
+        @include bgImage("<%= data.style?.mobile?.heroImageUrl %>");
+    }
+
+    [sor-user-info-capture-subtitle-mobile] {
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    [sor-user-info-capture-extra-paragraph-container-mobile]{
+        font-size: 14px;
+        line-height: 3px;
+    }
+
+    [sor-user-info-capture-form-container-mobile] {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    [sor-swipe-container-mobile] {
+        width: 100%;
+        max-width: 305px; // Safari issue
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 100%);
+        will-change: transform;
+        align-content: center;
+        overflow-x: auto;
+        scroll-snap-coordinate: 0 0;
+        scroll-snap-points-x: repeat(100%);
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        scroll-behavior: smooth;
+
+        [sor-step-mobile] {
+            height: 100vh;
+            scroll-snap-align: start;
+        }
+
+        [sor-step-mobile="COVER"]{
+            max-width: 305px;
+            display: <%- data.content?.mobile?.stepsOrder?.indexOf('COVER') == -1 ? 'none' : 'flex' %>;
+            order: <%- data.content?.mobile?.stepsOrder?.indexOf('COVER') %>;
+
+            > div {
+                <%- conditionalStyle('margin', data.style?.mobile?.coverContainerPadding) %>
+            }            
+        }
+
+        [sor-step-mobile="USER_INFO_CAPTURE"]{
+            max-width: 305px;
+            order: <%- data.content?.mobile?.stepsOrder?.indexOf('USER_INFO_CAPTURE') %>;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        [sor-step-mobile="SHARE"]{
+            max-width: 305px;
+            order: <%- data.content?.mobile?.stepsOrder?.indexOf('SHARE') %>;
+            display: flex;
+        }
+    }
+
+    [sor-user-info-capture-title-mobile]{
+        font-size: 19px;
+        font-weight: 700;
+        line-height: 26px;
+    }
+
+    [sor-share-titles-container]{
+        display: flex;
+        align-items: center;
+    }
+
+    [sor-user-info-capture-title-mobile]{
+        font-size: 19px;
+        font-weight: 700;
+        line-height: 26px;
+    }
+
+    [sor-share-titles-container]{
+        display: flex;
+        align-items: center;
+    }
+
+    [sor-share-panel-social-option-container] {
+        max-height: 45px;
+        min-height: 45px;
+    }
+
+    [sor-share-panel-social-option-preview-container] {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px 15px;
+
+        [sor-share-panel-social-option-preview-share-btn] {
+            min-height: 35px;
+            max-height: 40px;
+        }
+    }
+
+    [sor-share-panel-post-preview-image] {
+        @include bgImage("<%= data.content?.socialShareOptions?.FALLBACK?.postImageUrl %>", contain);
+        
+        min-height: 125px;
+    }
+
+    [sor-share-panel-social-option-item]{
+        img {
+            <% if(data.style?.mobile?.socialShareOptions?.socialOptionsInactiveColor) { %>
+                @include recolor(<%- data.style?.mobile?.socialShareOptions?.socialOptionsInactiveColor %>, 0.5);
+            <%}%>            
+        }        
+    }
+
+    [sor-share-step-bottom-belt] {
+        @include flexCenter();
+        height: 25px;
+        background-color: #ececec;
+        margin-top: 10px;
+        margin-left: -15px;
+        margin-right: -15px;
+        font-weight: 600;
+        font-size: 10px;
+    }
+
+    [sor-navigation-dots] {
+        position: absolute;
+        width: 100%;
+        bottom: 15px;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+    
+        [sor-navigation-dots-group] {
+            display: grid;
+            grid-template-columns: repeat(<%= data.content?.mobile?.stepsOrder?.length %>, auto);
+            grid-gap: 15px;
+        }
+
+        [sor-navigation-dot] {
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            border-color: black;
+            border-style: solid;
+            border-width: 0.5px;
+    
+            &.active {
+                background-color: #000000;
+            }
+        }
+    
+        <% if(!data.style?.mobile?.showStepDots) {%>
+            display: none;
+        <% }%>
+    }
+
+    [sor-footer] {
+        padding-bottom: 20px;
+    }
+
+    [sor-btn-toggle] {
+        top: 5px;
+        right: 5px;
+    }
+}
+
+[sor-share-panel-social-option-preview-share-btn="ALREADY_SHARED"] {
+    background-color: #949494 !important;
+    cursor: no-drop;
+    pointer-events: none;
+}
+
+[sor-cover-image-over-info-mobile-text] {
+    <%- secondaryFontPrior %>
+}
+
+// DESKTOP
+@media (min-width: 795px) {
+
+    [sor-mobile-container] {
+        display: none;
+    }
+
+    [sor-desktop-container] {
+
+        .primary-color {
+            <%- conditionalStyle('color', data.style?.desktop?.primaryColor, '#000000') %>
+        }
+
+        h1 {
+            font-size: 28px;
+            line-height: 39px;
+            font-weight: 700;
+        }
+
+        h2 {
+            line-height: 22px;
+        }
+    
+        a {
+            <%- conditionalStyle('color', data.style?.linkColor) %>
+        }
+
+        width: 100%;
+        height: 100%;
+        display: flex;
+
+        .siblings-panel {
+            flex: 1;
+            display: flex;
+        }
+
+        @include bgImage("<%= data.style?.desktop?.heroImageUrl %>");
+        
+        [sor-user-info-capture-title-desktop]{
+            font-weight: 700;
+        }
+
+        [sor-user-info-capture-subtitle-desktop] {
+            font-size: 15px;
+            margin-top: 0px;
+            line-height: 20px;
+        }
+
+        [sor-user-info-instruction-container] {
+            flex: 1;
+            justify-content: center;
+            gap: 15px;
+
+            [sor-user-info-capture-extra-paragraph-container-desktop] {
+                font-size: 15px;
+                margin-top: 0px;
+                line-height: 5px;
+            }
+        }
+
+        [sor-user-info-form-container] {
+            flex: 1.2;
+            justify-content: center;
+       }
+
+       [sor-share-panel-social-option-preview-container] {
+            <%- conditionalStyle('border-color', data.style?.desktop?.shareStep?.sharePreviewSelectedPlatformBorderColor, '#949494')  %>
+       }
+
+        [sor-share-panel-social-option-item]{
+            img {
+                <% if(data.style?.desktop?.socialShareOptions?.socialOptionsInactiveColor) { %>
+                    @include recolor(<%- data.style?.desktop?.socialShareOptions?.socialOptionsInactiveColor %>, 0.5);
+                <%}%>            
+            }
+
+            &.active {
+                <%- conditionalStyle('border-color', data.style?.desktop?.shareStep?.sharePreviewSelectedPlatformBorderColor, '#949494')  %>
+            }
+        }
+
+        [sor-btn-toggle] {
+            top: 10px;
+            right: 10px;
+        }    
+    
+        [sor-descritive-container-desktop] {
+            background-color: <%= data.style.descritiveContainerBgColor || data.style?.desktop?.descritiveContainerBgColor || "transparent" %>;
+            padding: 30px 5px 30px 55px;
+        }
+
+        [sor-badge-extra-info-2]{
+            background-color: #000000;
+            color: #ffffff;
+            width: fit-content;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }    
+
+        [sor-user-info-form] {
+            input {
+                font-size: 15px;
+                height: 50px;
+                padding-left: 15px;
+    
+                // dynamic style
+                <%- conditionalStyle('background-color', data.style?.desktop?.input?.backgroundColor, '#FFFFFF') %>
+                <%- conditionalStyle('border-style', data.style?.desktop?.input?.borderStyle, 'none') %>
+                <%- conditionalStyle('border-color', data.style?.desktop?.input?.borderColor) %>
+                <%- conditionalStyle('border-style', data.style?.desktop?.input?.borderColor ? 'solid' : null) %>
+                
+                <%- conditionalStyle('color', data.style?.desktop?.input?.color, '#949494') %>
+                
+                &::-webkit-input-placeholder {
+                    <%- conditionalStyle('color', data.style?.desktop?.input?.color, '#949494'); %>
+                }
+        
+                &::-moz-placeholder {
+                    <%- conditionalStyle('color', data.style?.desktop?.input?.color, '#949494'); %>
+                }
+        
+                &::-ms-placeholder {
+                    <%- conditionalStyle('color', data.style?.desktop?.input?.color, '#949494'); %>
+                }
+        
+                &::placeholder {
+                    <%- conditionalStyle('color', data.style?.desktop?.input?.color, '#949494'); %>
+                }
+            }
+    
+            [sor-submit-user-info-btn] {
+                margin-top: 15px;
+                height: 50px;
+                font-size: 15px;
+                font-weight: 700;
+            }
+        }
+    
+        [sor-user-info-input-email-form] {
+            margin-top: 8px;
+        }
+
+        [sor-share-instruction-container-desktop] {
+            display: flex;
+            flex-direction: column;
+            flex: 1.2;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        [sor-share-container-desktop]{
+            display: flex;
+            flex-direction: column;
+            flex: 1.8;
+        }
+    
+        [sor-share-panel-social-option-item] {
+            img {
+                width: 33px;
+            }
+        }
+    
+        [sor-share-panel-social-option-container] {
+            gap: 5%;
+        }
+    
+        [sor-share-panel-social-option-preview-share-btn] {
+            font-size: 15px;
+        }
+    
+        [sor-footer] {
+            font-size: 11px;
+            text-align: left;
+            line-height: 15px;
+
+            p {
+                color: #ffffff;
+            }
+        }
+    
+        [sor-hero-image-belt-info] {
+            @include flexCenter();
+            width: fit-content;
+            margin-top: 70px;
+            position: absolute;
+            right: 0px;
+            background-color: black;
+            color: white;
+            padding: 3px 20px;
+            font-size: 13px;
+            border-radius: 5px 0px 0px 5px;
+        }
+    }
+}
+
+[sor-mini-container] {
+    display: none;
+}
+
+// MINI
+@media (max-height: 290px) {
+    [sor-mobile-container] {
+        display: none;
+    }
+
+    [sor-desktop-container] {
+        display: none;
+    }
+
+    [sor-mini-virtual-container] {
+
+        &.contained {
+            position: relative;
+            bottom: -100%;
+            animation: smooth-appear 0.5s ease forwards;
+        }
+        
+        @include flexCenter();
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        background-color: transparent;
+        
+        [sor-mini-virtual-header]{
+            height: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            
+            [sor-btn-toggle] {
+                width: 60px;
+                height: 100%;
+                position: relative;
+                right: 0px;
+                border-radius: 5px 5px 0px 0px;
+                background-color: #000000;
+
+                img {
+                    width: 8px;
+                    @include recolor(#FFFFFF, 1);
+                }
+            }
+        }
+
+        [sor-mini-container]{
+
+            flex: 1;
+            @include flexCenter();
+            flex-direction: column;
+            width: 100%;
+            <%- conditionalStyle('background-color', data.style?.mini?.backgroundColor, '#FFFFFF') %>
+            <%- conditionalStyle('color', data.style?.mini?.color, '#000000') %>
+
+            [sor-mini-cover]{
+                flex: 1;
+                width: 100%;
+                @include bgImage("<%= data.style?.mini?.coverImageUrl %>", cover, no-repeat, top);
+            }
+    
+            [sor-mini-description-container] {
+                flex: 1;
+                @include flexCenter();
+                flex-direction: column;
+                width: 100%;
+                
+                [sor-mini-title]{
+                    @include flexCenter();
+                    flex: 1;
+                    text-align: center;
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+    
+                [sor-mini-toggle-btn]{
+                    padding: 8px 40px;
+                    background-color: black;
+                    color: white;
+                    border-radius: 20px;
+                    font-size: 20px;
+                    font-weight: 600;
+
+                    <%- conditionalStyle('background-color', data.style?.mini?.toggleButton?.backgroundColor, '#000000') %>
+                    <%- conditionalStyle('color', data.style?.mini?.toggleButton?.color, '#FFFFFF') %>
+                }
+            }
+        }
+    }
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+/*
+// Animations
+*/
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes smooth-appear {
+    to{
+      bottom: 0px;
+      opacity:1;
+    }
+}

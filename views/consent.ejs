@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Allow access permissions</title>
+</head>
+<body>
+<p>Hi <%= user.email %>!</p>
+<div><%= client.name %> is asking for all permissions on your wallet</div>
+<form action="/oauth2/authorize" method="post">
+    <input name="transaction_id" type="hidden" value="<%= transactionID %>">
+    <div>
+        <input type="submit" value="Allow" id="allow">
+        <input type="submit" value="Deny" name="cancel" id="deny">
+    </div>
+</form>
+</body>
+</html>

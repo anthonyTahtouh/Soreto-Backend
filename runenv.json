@@ -1,0 +1,34 @@
+[{
+	"name": "reverb-backend",
+	"script": "./app.js",
+	"env_staging": {
+		"SERVER_HOSTNAME": "staging.api.mylissi.com",
+		"SERVER_PORT": "3000",
+		"FRONT_URL": "http://staging.mylissi.com",
+		"BACK_URL": "http://staging.api.mylissi.com",
+		"COOKIE_DOMAIN": ".mylissi.com",
+		"COOKIE_SECRET": "3$mVcEMp&tfGikQdu6jgXrNp9C@t3v9B",
+		"FACEBOOK_APP_ID": "265509053841325",
+		"FACEBOOK_APP_SECRET": "64522e720eb9ac19774b93253a394a57",
+		"TWITTER_APP_ID": "ZpW1MF8CIVpKt3Isi7s5B3bnT",
+		"TWITTER_APP_SECRET": "KoBjdGg3AoD0paE7kbqgvK2g6HQrH64WprIiV6x7WsnxTGaPx6",
+		"GOOGLE_APP_ID": "896299315781-a8rtghvfsh5bphqfogsjbl0dnpuvkpv7.apps.googleusercontent.com",
+		"GOOGLE_APP_SECRET": "d8KdwZCNUn7bgM4b3KZDRrxe"
+	},
+	"env_sandbox": {
+		"SERVER_HOSTNAME": "sandbox.api.mylissi.com",
+		"SERVER_PORT": "3000",
+		"FRONT_URL": "http://sandbox.mylissi.com",
+		"BACK_URL": "http://sandbox.api.mylissi.com",
+		"COOKIE_DOMAIN": ".mylissi.com",
+		"COOKIE_SECRET": "#y$9s9@tWqYlCu38Ypv@be&NdBoi#KK5",
+		"FACEBOOK_APP_ID": "269813240077573",
+		"FACEBOOK_APP_SECRET": "5e17a851978c895c9ccf7c97aaca3a2f",
+		"TWITTER_APP_ID": "cqv0A3CkgfORZzdzB7k5oM1RW",
+		"TWITTER_APP_SECRET": "SNUrQD7OgVdLtGdjSgGrcx0btmcsA7R5fw1UVJVbrhzRaNMuO5"
+	}
+},
+{
+	"name": "reverb-cron",
+	"script": "./cron.js"
+}]

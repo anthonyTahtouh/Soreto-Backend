@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta property="og:title" content="<%= title %>" />
+  <meta property="og:description" content="Use discount code <%= discountCode %> for <%= discountValue %>% off." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="<%= imageUrl %>" />
+
+  <link rel="icon" href="https://soreto.com/wp-content/uploads/2017/01/logo-favicon-2.png" sizes="32x32" />
+  <link rel="icon" href="https://soreto.com/wp-content/uploads/2017/01/logo-favicon-2.png" sizes="192x192" />
+  <title><%= title %></title>
+
+  <style>
+    body {
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Soreto</h1>
+  <img src="<%= imageUrl %>" />
+  <p>Copy your discount code:</p><p><%= discountCode %></p>
+  <a href="<%= productUrl %>">Continue...</a>
+  
+  <script type="text/javascript">
+    function reverbGo () {
+      window.location = '<%= productUrl %>';
+    }
+  </script>
+</body>
+</html>

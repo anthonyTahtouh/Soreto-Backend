@@ -1,0 +1,4 @@
+web: nodemon dist/app.bundle.js
+service_worker: nodemon dist/service_worker.bundle.js
+service_meta: nodemon dist/service_meta.bundle.js
+service_api: nodemon dist/service_api.bundle.js

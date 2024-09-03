@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Sample order confirmation page</title>
+</head>
+<body>
+<div>
+  <div class="reverb-order-value">2000</div>
+  <div class="reverb-order-id">X913</div>
+  <div class="reverb-line-items">
+    <div class="reverb-line-item">
+      <div class="reverb-line-item-name">Banana</div>
+      <div class="reverb-line-item-description">Super-tasty yellow bananas.</div>
+      <div class="reverb-line-item-sku">123</div>
+      <div class="reverb-line-item-quantity">10</div>
+      <div class="reverb-line-item-price">0.6</div>
+      <div class="reverb-line-item-type">food</div>
+    </div>
+    <div class="reverb-line-item">
+      <div class="reverb-line-item-name">Coffee</div>
+      <div class="reverb-line-item-description">Mhmmm...</div>
+      <div class="reverb-line-item-sku">456</div>
+      <div class="reverb-line-item-quantity">5</div>
+      <div class="reverb-line-item-price">3.4</div>
+      <div class="reverb-line-item-type">food</div>
+    </div>
+    <div class="reverb-line-item">
+      <div class="reverb-line-item-name">Aspirin</div>
+      <div class="reverb-line-item-description">Aspirin, also known as acetylsalicylic acid (ASA), is a medication used to treat pain, fever, and inflammation.</div>
+      <div class="reverb-line-item-sku">789</div>
+      <div class="reverb-line-item-quantity">20</div>
+      <div class="reverb-line-item-price">4.2</div>
+      <div class="reverb-line-item-type">medication</div>
+    </div>
+  </div>
+  <img id="reverbPixel" />
+</div>
+
+<script type="text/javascript">
+    window.reverbAsyncInit = function() {
+        Reverb.init('574f267cb7456442581f5e1d');
+    };
+    (function(d, s, id) {
+        var script, first_script = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        script = d.createElement(s);
+        script.id = id;
+        script.src = "http://localhost:8000/scripts/" + id + ".min.js";
+        first_script.parentNode.insertBefore(script, first_script);
+    }(document, 'script', 'reverb-sdk'));
+
+    function shareOnSocial(socialPlatform) {
+        Reverb.shareOnSocial(socialPlatform, document.getElementById('product_url').value);
+    }
+</script>
+<!-- Set cookie for testing -->
+<script>
+  document.cookie='reverbId_574f267cb7456442581f5e1d=user1; reverbShare_574f267cb7456442581f5e1d=share1';
+</script>
+</body>
+</html>

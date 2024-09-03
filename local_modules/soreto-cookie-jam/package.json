@@ -1,0 +1,19 @@
+{
+  "name": "soreto-cookie-jam",
+  "version": "1.0.0",
+  "description": "An Node Express JS cookie packer and manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cookie",
+    "handler",
+    "packer"
+  ],
+  "author": "Tiago Barroso",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
+}

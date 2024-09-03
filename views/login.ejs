@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/styleLogin.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+
+    <link href='https://fonts.googleapis.com/css?family=open+sans:400,300,300italic,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <img class="logo" src="/img/logo.svg" alt="Reverb Logo">
+        </div>
+        <div class="line-separator"></div>
+        <div>
+            <form method="post">
+                <p><input class="input" name="email" placeholder="Email" /></p>
+                <p><input class="input" name="password" placeholder="Password" type="password" /></p>
+                <p><input class="btn-login" name="submit" type="submit" value="Login!" /></p>
+            </form>
+        </div>
+        <div class="line-separator"></div>
+        <div>
+            <p class="text-center">Not a LISSI member?</p>
+            <form action="register" method="get">
+                <% if(returnUrl) { %>
+                    <p>
+                        <input type="hidden" name="returnUrl" value="<%= returnUrl %>" />
+                    </p>
+                <% } %>
+                <p><input class="btn-login" type="submit" value="Register!"></p>
+            </form>
+        </div>
+        <div class="line-separator"></div>
+        <div>
+            <form method="post" action="skipLogin">
+                <% if(socialPlatform) { %>
+                    <p>
+                        <input type="hidden" name="returnUrl" value="<%= returnUrl %>" />
+                        <input class="btn-login" type="submit" value="Share directly on <%= socialPlatform %>" />
+                    </p>
+                <% } %>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

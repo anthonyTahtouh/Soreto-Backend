@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html,body{ margin:0; padding:0; height:100%; width:100%; }
+
+
+
+    input {
+      margin-top: 11px;
+    }
+
+    label{
+      margin-right: 8px;
+    }
+
+  /*.border{
+      border-style: solid;
+      border-width: 1px;
+      margin: 10px;
+      margin-bottom: 20px;
+      padding: 5px 10px;
+      text-align: centre;
+      width: 75%;
+  }*/
+  
+  body{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/7a/Paraty_09_2007_59.JPG');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .box {
+      position: relative;
+      padding: 40px 40px;
+      height: auto;
+      max-width: 500px;
+      margin: auto;
+      margin-bottom: 60px;
+      background-color: rgba(255, 255, 255, 0.85);
+  }
+
+  .logo {
+      display: block;
+      position: relative;
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 50px;
+      height: 120px;
+      max-width: 120px;
+  }
+
+  .line-separator{
+      max-width: 360px;
+      margin: 20px auto 0px auto;
+      height:1px;
+      background:#717171;
+      border-bottom:1px solid #898989;
+  }
+
+  ::-webkit-input-placeholder {
+      color: #e1e1e1;
+  }
+
+  .input {
+      display: block;
+      position: relative;
+      padding: 6px 20px;
+      max-width: 360px;
+      height: 50px;
+      margin: 25px auto 0px auto;
+      font-family: 'Lato',sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #363636;
+      background-color: white;
+      border-style: solid;
+      border-color: #e1e1e1;
+      border-width: 1px;
+  }
+
+  .input:focus {outline:0;}
+
+  .btn-container {
+      text-align: center;
+      position: relative;
+      max-width: 400px;
+      margin: 20px auto 0px auto;
+  }
+
+  .btn-facebook {
+      display: inline-block;
+      transition: all 0.5s ease;
+      width: 50px;
+      height: 50px;
+      margin: 0px 7px;
+      /*padding: 13px 16px;*/
+      border-radius: 25px;
+      background-color: #3b5998;
+  }
+
+  .btn-facebook span {
+      transition: all 0.5s ease;
+      color: white;
+      font-size: 28px;
+      margin-top: 13px;
+  }
+
+  .btn-facebook:hover {
+      background-color: #fff;
+  }
+
+  .btn-facebook:hover span {
+      color: #3b5998;
+  }
+
+  .btn-twitter {
+      display: inline-block;
+      transition: all 0.5s ease;
+      width: 50px;
+      height: 50px;
+      margin: 0px 7px;
+      /*padding: 12px 13px;*/
+      border-radius: 25px;
+      background-color: #4099ff;
+  }
+
+  .btn-twitter span {
+      transition: all 0.5s ease;
+      color: white;
+      font-size: 28px;
+      margin-top: 13px;
+  }
+
+  .btn-twitter:hover {
+      background-color: #fff;
+  }
+
+  .btn-twitter:hover span {
+      color: #3b5998;
+  }
+
+  .btn-pinterest {
+      display: inline-block;
+      transition: all 0.5s ease;
+      width: 50px;
+      height: 50px;
+      margin: 0px 7px;
+      /*padding: 13px 16px;*/
+      border-radius: 25px;
+      background-color: #AA2529;
+  }
+
+  .btn-pinterest span {
+      transition: all 0.5s ease;
+      color: white;
+      font-size: 28px;
+      margin-top: 13px;
+  }
+
+  .btn-pinterest:hover {
+      background-color: #fff;
+  }
+
+  .btn-pinterest:hover span {
+      color: #aa2529;
+  }
+
+  .btn-google {
+      display: inline-block;
+      transition: all 0.5s ease;
+      width: 50px;
+      height: 50px;
+      margin: 0px 7px;
+      border-radius: 25px;
+      background-color: #DA4835;
+  }
+
+  .btn-google span {
+      transition: all 0.5s ease;
+      color: white;
+      font-size: 28px;
+      margin-top: 13px;
+  }
+
+  .btn-google:hover {
+      background-color: #fff;
+  }
+
+  .btn-google:hover span {
+      color: #DA4835;
+  }
+
+  .auth-container {
+      text-align: center;
+      position: relative;
+      width: auto;
+      margin: 20px auto 0px auto;
+  }
+
+  .auth-container span {
+      display: block;
+      font-family: 'Lato', sans-serif;;
+      font-size: 16px;
+      color: #363636;
+      padding-bottom: 5px;
+  }
+
+  .btn-auth {
+      display: block;
+      transition: all 0.5s ease;
+      margin: 0 auto;
+      width: 150px;
+      height: 40px;
+      font-family: 'lato', sans-serif;
+      font-size: 16px;
+      font-weight: 900;
+      color: #fff;
+      border: none;
+      background-color: #00a99d;
+  }
+
+  .btn-auth:hover {
+      background-color: #ed145b;
+  }
+
+  .btn-auth:focus {
+      outline: none
+  }
+  </style>
+
+  <style type="text/css">
+    
+    .box{
+/*      background: pink!important;
+      z-index: 9999!important;*/
+    }
+  </style>
+
+  <title>Sample page to load reverb js sdk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<img id="reverbPixel" />
+
+<div class="container">
+<div class='cheat-sheet'>
+<pre>
+  Cheat sheet<br>
+  NC:59382bada59c3c16a035f461
+  Ryman:5b2a6c52420c3c26e543b25a
+  BAA:5b51c7936e96d7021a123db3
+  Scarlette and Jo:5b3f361885f5283513505be3
+<pre>
+
+</div>
+  <div class="box">
+
+    <div>
+      <img class="logo" src="https://s3-eu-west-1.amazonaws.com/s3-reverb-hosting-prod/assets/logo.svg" alt="Reverb Logo">
+    </div>
+    <div class='userDetails'>
+      <label>Name</label><input type="text" class='name-input' name="name" value="Debug User"><br/>
+      <label>Email</label><input type="text" class='email-input' name="email" value='debug@soreto.com'><br/>
+      <label>Test mode</label><input class='test-input' type="checkbox" name="test-mode" value="test-mode" checked><br/>
+      <label>client id</label><input type="" id='client-id' placeholder="client id" name=""><br/>
+    </div>
+    <div id="platform">
+      <input type="radio" name="state" value="local"> local
+      <input type="radio" name="state" value="staging"> staging
+      <input type="radio" name="state" value="sandbox"> sandbox
+      <input type="radio" name="state" value="live"> live
+
+    </div>
+    <button class="btn-auth" onclick="launchSDK(document.getElementById('client-id').value,getPlatform());">Load new client</button>
+    <!-- <div class="line-separator"></div>
+    <div class="to-share">
+      <input class="input" type="text" name="product_url" id="product_url" placeholder="Url to share" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Url to share'">
+    </div> -->
+    <div class="line-separator"></div>
+    <div class="auth-container">
+      <span>Launch Lightbox</span><button class="btn-auth" onclick="reverbOpenLightboxTest();">Launch Lightbox</button>
+      <span>Launch Product tracking</span><button class="btn-auth" onclick="reverbSendOrderTest();">Fire prod track</button>
+    </div>
+  </div>
+  <!--<div style="display:none">-->
+    <!--<div class="reverb-order-id">X977</div>-->
+    <!--<div class="reverb-line-items">-->
+      <!--<div class="reverb-line-item">-->
+        <!--<div class="reverb-line-item-name">Banana</div>-->
+        <!--<div class="reverb-line-item-description">Super-tasty yellow bananas.</div>-->
+        <!--<div class="reverb-line-item-sku">123</div>-->
+        <!--<div class="reverb-line-item-quantity">10</div>-->
+        <!--<div class="reverb-line-item-price">0.6</div>-->
+        <!--<div class="reverb-line-item-category">food</div>-->
+      <!--</div>-->
+      <!--<div class="reverb-line-item">-->
+        <!--<div class="reverb-line-item-name">Coffee</div>-->
+        <!--<div class="reverb-line-item-description">Mhmmm...</div>-->
+        <!--<div class="reverb-line-item-sku">456</div>-->
+        <!--<div class="reverb-line-item-quantity">5</div>-->
+        <!--<div class="reverb-line-item-price">3.4</div>-->
+        <!--<div class="reverb-line-item-category">food</div>-->
+      <!--</div>-->
+      <!--<div class="reverb-line-item">-->
+        <!--<div class="reverb-line-item-name">Aspirin</div>-->
+        <!--<div class="reverb-line-item-description">Aspirin, also known as acetylsalicylic acid (ASA), is a medication used to treat pain, fever, and inflammation.</div>-->
+        <!--<div class="reverb-line-item-sku">789</div>-->
+        <!--<div class="reverb-line-item-quantity">20</div>-->
+        <!--<div class="reverb-line-item-price">4.2</div>-->
+        <!--<div class="reverb-line-item-category">medication</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<img id="reverbPixel" />-->
+</div>
+
+<script type="text/javascript">
+  function getPlatform(){
+    return document.querySelector('input[name=\"state\"]:checked').value
+  }
+
+  function getName(){
+    return document.querySelector('input.name-input').value
+  }
+
+  function getEmail(){
+    return document.querySelector('input.email-input').value
+  }
+
+  function getTestMode(){
+    return document.querySelector('input.test-input').checked
+  }
+
+
+
+  function getRandomArbitrary(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  function reverbSendOrderTest () {
+    console.log('clicked!')
+    var order = Reverb.initOrder();
+    order.setOrderId('ABCD123474AA'+getRandomArbitrary(1, 9999));
+    order.setOrderTotal(37.50);
+    order.addLineItem('Blue Jeans', 'Blue Jeans W32/L34', 'BJCO654398', 2, 13.50, 'jeans');
+    order.addLineItem('Black Cap', 'Black Flexfit Cap', 'FF76342598', 1, 10.50);
+    order.ready();
+
+    launchSDK('593ea74482600877f6b5b30f')
+  }
+
+  function reverbSendOrder() {
+    console.log('clicked!')
+    var order = Reverb.initOrder();
+    order.setOrderId('ABCD123474AA'+getRandomArbitrary(1, 9999));
+    order.setOrderTotal(37.50);
+    order.addLineItem('Blue Jeans', 'Blue Jeans W32/L34', 'BJCO654398', 2, 13.50, 'jeans');
+    order.addLineItem('Black Cap', 'Black Flexfit Cap', 'FF76342598', 1, 10.50);
+    order.ready();
+    console.log(order)
+  }
+
+
+  function launchSDK(clientId,platform){
+    existingSdk = document.getElementById('reverb-sdk-1.5.0')
+
+
+    if (existingSdk){
+      existingSdk.remove();
+      if (document.getElementById('uglipop_overlay_wrapper')){
+        document.getElementById('uglipop_overlay_wrapper').remove()
+      }
+      if (document.getElementById('uglipop_content_fixed')){
+        document.getElementById('uglipop_content_fixed').remove()
+      }
+    }
+
+
+    window.reverbAsyncInit = function() {
+       // Reverb.init('58a5b7ca00f5fd553c349a9f',{v:2}); //TPW SANDBOX
+      //  Reverb.init('58c9132454f8315a8b0da11d',{v:2});  //NC SANDBOX
+
+     //   Reverb.init(clientId,{v:2}); // tpw live
+
+        
+      Reverb.init(clientId, {
+        testMode: getTestMode()
+      });
+    };
+    console.log(window.reverbAsyncInit);
+
+    (function(d, s, id) {
+      var script, first_script = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      script = d.createElement(s);
+      script.id = id;
+      console.log('platform')
+      switch(platform) {
+          case 'live':
+              script.src = "https://api.soreto.com/scripts/" + id + ".min.js";
+              break;
+          case 'staging':
+              script.src = "https://staging-api.soreto.com/scripts/" + id + ".min.js";
+              break;
+          case 'sandbox':
+              script.src = "https://sandbox-api.soreto.com/scripts/" + id + ".min.js";
+              break;
+          default:   
+          script.src = "http://lissitest.com:5000/scripts/" + id + ".min.js";
+      }
+
+      first_script.parentNode.insertBefore(script, first_script);
+    }(document, 'script', 'reverb-sdk-1.5.0'));
+
+  }
+
+
+  function reverbOpenLightboxTest () {
+
+    ReverbLightbox.options({
+      // "dropShadow":false,
+      // "borderRadius":"0",
+      // "breakpoints":{
+      //   "dimM":"800px"
+      // },
+      // "dimensions":{
+      //   "dimD":{
+      //     "w":"800px",
+      //     "h":"500px"
+      //   },
+      //   "dimT":{
+      //     "w":"800px",
+      //     "h":"500px"
+      //   },
+      //   "dimM":{
+      //     "h":"450px;",
+      //     "w":"300px"
+      //   }
+      // }
+    });
+
+    ReverbLightbox.open({
+      firstName:getName(),
+      testMode:getTestMode(),
+      // products: [
+      //   {
+      //     title: 'Test Product 1',
+      //     image: 'https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg',
+      //     productUrl: 'https://www.theproteinworks.com/bcaa-extreme',
+      //     description:'Donec nec justo eget felis facilisis fermentum.'
+      //   }
+      // ]
+    },getEmail());
+  }
+</script>
+</body>
+</html>
